@@ -4,16 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3AD948B-B97E-4CC3-B8BE-EAC7BAD0E39E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{72F7E8DF-05B3-420C-9D6B-0B876CB86C36}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ruley.NET</RootNamespace>
-    <AssemblyName>Ruley.NET</AssemblyName>
+    <RootNamespace>TestApp</RootNamespace>
+    <AssemblyName>TestApp</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -37,26 +40,6 @@
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=1.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.1.3.2\lib\net45\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp.Scripting, Version=1.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.Scripting.1.3.2\lib\dotnet\Microsoft.CodeAnalysis.CSharp.Scripting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.Scripting, Version=1.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Scripting.Common.1.3.2\lib\dotnet\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.4.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SmartFormat, Version=1.6.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SmartFormat.NET.1.6.1.0\lib\net40\SmartFormat.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -91,18 +74,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Reactive.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Core.3.0.0\lib\net46\System.Reactive.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Interfaces.3.0.0\lib\net45\System.Reactive.Interfaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Linq, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Linq.3.0.0\lib\net46\System.Reactive.Linq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Reflection.Metadata, Version=1.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reflection.Metadata.1.3.0\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
       <Private>True</Private>
@@ -151,76 +122,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component.cs" />
-    <Compile Include="ConsoleOutput.cs" />
-    <Compile Include="Dynamic\DynamicDictionary.cs" />
-    <Compile Include="Dynamic\JsonHelper.cs" />
-    <Compile Include="EmailOutput.cs" />
-    <Compile Include="Event.cs" />
-    <Compile Include="Filters\BlockFilter.cs" />
-    <Compile Include="Filters\BranchFilter.cs" />
-    <Compile Include="Filters\ChainFilter.cs" />
-    <Compile Include="Filters\ConcatenateFilter.cs" />
-    <Compile Include="Filters\ConditionalBaseFilter.cs" />
-    <Compile Include="Filters\ConditionalFilter.cs" />
-    <Compile Include="Filters\ConsoleFilter.cs" />
-    <Compile Include="Filters\CountFilter.cs" />
-    <Compile Include="Filters\DeleteFilter.cs" />
-    <Compile Include="Filters\DistinctFilter.cs" />
-    <Compile Include="Filters\DistinctTests.cs" />
-    <Compile Include="Filters\EmailFilter.cs" />
-    <Compile Include="Filters\Filter.cs" />
-    <Compile Include="Filters\FilterExtensions.cs" />
-    <Compile Include="Filters\FilterSerializationWrapper.cs" />
-    <Compile Include="Filters\GraphiteFilter.cs" />
-    <Compile Include="Filters\GroupByFilter.cs" />
-    <Compile Include="Filters\HttpFilter.cs" />
-    <Compile Include="Filters\InlineFilter.cs" />
-    <Compile Include="Filters\Jsonify.cs" />
-    <Compile Include="Filters\LowerCaseFilter.cs" />
-    <Compile Include="Filters\MapFilter.cs" />
-    <Compile Include="Filters\MergeFilter.cs" />
-    <Compile Include="Filters\MergeTests.cs" />
-    <Compile Include="Filters\MessageBusFilter.cs" />
-    <Compile Include="Filters\PassThroughFilter.cs" />
-    <Compile Include="Filters\PrevFilter.cs" />
-    <Compile Include="Filters\PropertyConverter.cs" />
-    <Compile Include="Filters\RegexFilter.cs" />
-    <Compile Include="Filters\ReplaceFilter.cs" />
-    <Compile Include="Filters\ReplayFieldFilter.cs" />
-    <Compile Include="Filters\ScriptFilter.cs" />
-    <Compile Include="Filters\SkipFIlter.cs" />
-    <Compile Include="Filters\SlackFilter.cs" />
-    <Compile Include="Filters\ThrottleFilter.cs" />
-    <Compile Include="Filters\TimestampFilter.cs" />
-    <Compile Include="Input.cs" />
-    <Compile Include="IntervalInput.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="MessageBus.cs" />
-    <Compile Include="ObservableFileWatcher.cs" />
-    <Compile Include="Output.cs" />
-    <Compile Include="Payload.cs" />
-    <Compile Include="Preprocessor.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Property.cs" />
-    <Compile Include="Rule.cs" />
-    <Compile Include="RuleManager.cs" />
-    <Compile Include="RuleParseException.cs" />
-    <Compile Include="RuleProvider.cs" />
-    <Compile Include="RxExtensions.cs" />
-    <Compile Include="SlackClient.cs" />
-    <Compile Include="SlackOutput.cs" />
-    <Compile Include="TemplatedPropertyGetter.cs" />
-    <Compile Include="Templating.cs" />
-    <Compile Include="TestInput.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="rules\rukle.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ruley.NET\Ruley.NET.csproj">
+      <Project>{c3ad948b-b97e-4cc3-b8be-eac7bad0e39e}</Project>
+      <Name>Ruley.NET</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

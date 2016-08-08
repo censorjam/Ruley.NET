@@ -1,0 +1,56 @@
+﻿{
+  "Name": "Test",
+  "Debug": true,
+
+  "parameters": [
+    { "cheese": 1 }
+  ],
+
+  "template": {
+    "input": {
+      "$type": "@interval",
+      "period": 1
+    },
+
+    "filters": [
+      {
+        "$type": "@count",
+        "field": "count",
+        "period": 5000
+      },
+      {
+        "$type": "@script",
+        "value": "@event.count = @event.count * 2"
+      },
+      {
+        "$type": "@merge",
+        "value": {
+          "text": "helloworld"
+        }
+      },
+      {
+        "$type": "@if",
+        "value": "=> @event.text == 'helloworld'",
+        "then": {
+          "$type": "@consolef",
+          "message": "{text} helloworld"
+        }
+      },
+      //{
+      //  "$type": "@if",
+      //  "value": "=> @event.text == \"helloworld\"",
+      //  "then": {
+      //    "$type": "@consolef",
+      //    "message": "{text} helloworld"
+      //  }
+      //}
+      {
+        "$type": "@consolef",
+        //"message": "{text} helloworld"
+      }
+    ],
+
+    "outputs": [
+    ]
+  }
+}
