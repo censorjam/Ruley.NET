@@ -6,26 +6,49 @@
     { "cheese": 1 }
   ],
 
-  "template": {
+  "definition": {
     "input": {
       "$type": "@interval",
-      "period": 1
+      "period": 250
     },
 
     "filters": [
       {
         "$type": "@count",
         "field": "count",
-        "period": 5000
+        "period": 1000
+      },
+      {
+        "$type": "@merge",
+        "value": {
+          "text": "helloworld",
+          "app": "testapp"
+        }
       },
       {
         "$type": "@script",
         "value": "@event.count = @event.count * 2"
       },
+      //{
+      //  "$type": "@switch",
+      //  "value": "=> @event.app",
+      //  "switch": {
+      //    "one": "@event.count = @event.count + 1",
+      //    "two": "@event.count = @event.count + 2"
+      //  } 
+      //},
       {
-        "$type": "@merge",
-        "value": {
-          "text": "helloworld"
+        "$type": "@map",
+        "value": "=> @event.app",
+        "map": {
+          "testapp1": {
+            "x": "y",
+            "k": "v"
+          },
+          "testapp2": {
+            "x": "y",
+            "k": "v"
+          }
         }
       },
       {
@@ -36,16 +59,8 @@
           "message": "{text} helloworld"
         }
       },
-      //{
-      //  "$type": "@if",
-      //  "value": "=> @event.text == \"helloworld\"",
-      //  "then": {
-      //    "$type": "@consolef",
-      //    "message": "{text} helloworld"
-      //  }
-      //}
       {
-        "$type": "@consolef",
+        "$type": "@consolef"
         //"message": "{text} helloworld"
       }
     ],

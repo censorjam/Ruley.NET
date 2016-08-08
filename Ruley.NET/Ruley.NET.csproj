@@ -155,14 +155,11 @@
     <Compile Include="ConsoleOutput.cs" />
     <Compile Include="Dynamic\DynamicDictionary.cs" />
     <Compile Include="Dynamic\JsonHelper.cs" />
-    <Compile Include="EmailOutput.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Filters\BlockFilter.cs" />
     <Compile Include="Filters\BranchFilter.cs" />
     <Compile Include="Filters\ChainFilter.cs" />
     <Compile Include="Filters\ConcatenateFilter.cs" />
-    <Compile Include="Filters\ConditionalBaseFilter.cs" />
-    <Compile Include="Filters\ConditionalFilter.cs" />
     <Compile Include="Filters\ConsoleFilter.cs" />
     <Compile Include="Filters\CountFilter.cs" />
     <Compile Include="Filters\DeleteFilter.cs" />

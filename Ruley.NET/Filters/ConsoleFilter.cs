@@ -15,7 +15,7 @@ namespace Ruley.Core.Filters
             }
             else
             {
-                Console.WriteLine(JsonConvert.SerializeObject(x, Formatting.Indented));
+                Console.WriteLine(JsonConvert.SerializeObject(x.Data, Formatting.Indented));
             }
             return x;
         }

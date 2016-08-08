@@ -16,7 +16,7 @@ namespace Ruley.Core
         internal string FileName { get; set; }
         public bool Debug { get; set; }
         public List<JObject> Parameters { get; set; }
-        public Rule Template { get; set; }
+        public Rule Definition { get; set; }
 
         private List<Rule> _rules = new List<Rule>();
 
@@ -32,7 +32,7 @@ namespace Ruley.Core
 
             foreach (var obj in Parameters)
             {
-                var rule = JsonConvert.DeserializeObject<Rule>(JsonConvert.SerializeObject(Template, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto }), new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto });
+                var rule = JsonConvert.DeserializeObject<Rule>(JsonConvert.SerializeObject(Definition, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto }), new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto });
                 _rules.Add(rule);
                 rule.Parameters = DynamicDictionary.Create(obj);
                 rule.Name = FileName;
