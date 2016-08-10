@@ -13,6 +13,8 @@ namespace Ruley.Core.Filters
         public Filter Filter { get; set; }
         public List<Filter> Filters { get; set; }
 
+        private string _filterTemplate;
+
         private readonly Subject<Event> _subject = new Subject<Event>();
         protected override IObservable<Event> Observable(IObservable<Event> source)
         {
@@ -21,12 +23,17 @@ namespace Ruley.Core.Filters
                 Filter = Filters.ToSingle();
             }
 
-            source.GroupBy(m => Key.GetValue(m)).Subscribe(i =>
+            //create a clone of the filter to be used as a template
+            if (_filterTemplate == null)
+            {
+                _filterTemplate = JsonConvert.SerializeObject(new FilterSerializationWrapper() { Filter = Filter }, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto });
+            }
+            
+            source.GroupBy(m => Key.Get(m)).Subscribe(i =>
             {
                 var subject = new Subject<Event>();
-                var serialize = JsonConvert.SerializeObject(new FilterSerializationWrapper() { Filter = Filter }, new JsonSerializerSettings() {TypeNameHandling = TypeNameHandling.Auto});
 
-                var filter = JsonConvert.DeserializeObject<FilterSerializationWrapper>(serialize,
+                var filter = JsonConvert.DeserializeObject<FilterSerializationWrapper>(_filterTemplate,
                     new JsonSerializerSettings() {TypeNameHandling = TypeNameHandling.Auto}).Filter;
 
                 filter.Extend(subject.AsObservable()).Subscribe(_subject);

@@ -50,6 +50,7 @@ namespace Ruley.Core
 
             _preprocessor.Alias("@if", "Ruley.Core.Filters.BranchFilter, Ruley.NET");
             _preprocessor.Alias("@replayField", "Ruley.Core.Filters.ReplayFieldFilter, Ruley.NET");
+            _preprocessor.Alias("@debounce", "Ruley.NET.Filters.DebounceFilter, Ruley.NET");
             _preprocessor.Alias("@regex", "Ruley.Core.Filters.RegexFilter, Ruley.NET");
 
             _preprocessor.Alias("@uppercase", "Ruley.Core.Filters.UpperCaseFilter, Ruley.NET");
@@ -62,9 +63,12 @@ namespace Ruley.Core
             _preprocessor.Alias("@skip", "Ruley.Core.Filters.SkipFilter, Ruley.NET");
             _preprocessor.Alias("@http", "Ruley.Core.Filters.HttpFilter, Ruley.NET");
 
-            _preprocessor.Alias("@redis.ping", "Ruley.Redis.RedisPing, Ruley.Redis");
+            _preprocessor.Alias("@redis.ping", "Ruley.Redis.RedisPingFilter, Ruley.Redis");
+            _preprocessor.Alias("@redis.info", "Ruley.Redis.RedisInfoInput, Ruley.Redis");
+
             _preprocessor.Alias("@rabbitmq.in", "Ruley.RabbitMq.RabbitMqInput, Ruley.RabbitMq");
             _preprocessor.Alias("@consolef", "Ruley.Core.Filters.ConsoleFilter, Ruley.NET");
+            _preprocessor.Alias("@graphite.out", "Ruley.NET.Filters.GraphiteOutputFilter, Ruley.NET");
             _preprocessor.Alias("@console", "Ruley.Core.Outputs.ConsoleOutput, Ruley.NET");
 
             _preprocessor.Alias("@slack_url", "https://hooks.slack.com/services/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");

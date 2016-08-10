@@ -27,7 +27,7 @@
       },
       {
         "$type": "@script",
-        "value": "@event.count = @event.count * 2"
+        "value": "@event.count"
       },
       //{
       //  "$type": "@switch",

@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Graphite, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Graphite.NET.1.1\lib\net40\Graphite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeAnalysis, Version=1.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.Common.1.3.2\lib\net45\Microsoft.CodeAnalysis.dll</HintPath>
       <Private>True</Private>
@@ -162,6 +166,7 @@
     <Compile Include="Filters\ConcatenateFilter.cs" />
     <Compile Include="Filters\ConsoleFilter.cs" />
     <Compile Include="Filters\CountFilter.cs" />
+    <Compile Include="Filters\DebounceFilter.cs" />
     <Compile Include="Filters\DeleteFilter.cs" />
     <Compile Include="Filters\DistinctFilter.cs" />
     <Compile Include="Filters\DistinctTests.cs" />
@@ -170,6 +175,7 @@
     <Compile Include="Filters\FilterExtensions.cs" />
     <Compile Include="Filters\FilterSerializationWrapper.cs" />
     <Compile Include="Filters\GraphiteFilter.cs" />
+    <Compile Include="Filters\GraphiteOutput.cs" />
     <Compile Include="Filters\GroupByFilter.cs" />
     <Compile Include="Filters\HttpFilter.cs" />
     <Compile Include="Filters\InlineFilter.cs" />
@@ -218,6 +224,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Todo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

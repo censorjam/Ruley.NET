@@ -12,10 +12,10 @@ namespace Ruley.Core.Filters
         public override Event Apply(Event msg)
         {
             object n;
-            n = Value.GetValue(msg);
-
-            if (n != null)
+            
+            if (Value != null)
             {
+                n = Value.Get(msg);
                 var next = JsonConvert.SerializeObject(n);
                 if (!next.Equals(_prevValue) || !_hadValue)
                 {

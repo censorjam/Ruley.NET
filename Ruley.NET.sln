@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruley.NET", "Ruley.NET\Rule
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{72F7E8DF-05B3-420C-9D6B-0B876CB86C36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruley.Redis", "Ruley.Redis\Ruley.Redis.csproj", "{CEB2AB7D-C494-4AA1-8B27-CD3736245240}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{72F7E8DF-05B3-420C-9D6B-0B876CB86C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72F7E8DF-05B3-420C-9D6B-0B876CB86C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72F7E8DF-05B3-420C-9D6B-0B876CB86C36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEB2AB7D-C494-4AA1-8B27-CD3736245240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEB2AB7D-C494-4AA1-8B27-CD3736245240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEB2AB7D-C494-4AA1-8B27-CD3736245240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEB2AB7D-C494-4AA1-8B27-CD3736245240}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

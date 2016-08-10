@@ -7,7 +7,7 @@
 
         public override Event Apply(Event msg)
         {
-            msg.Data[Destination.Get(msg)] = ((string) Value.GetValue(msg)).ToLower();
+            msg.Data[Destination.Get(msg)] = ((string) Value.Get(msg)).ToLower();
             return msg;
         }
     }
@@ -19,7 +19,7 @@
 
         public override Event Apply(Event msg)
         {
-            msg.Data[Destination.Get(msg)] = ((string)Value.GetValue(msg)).ToUpper();
+            msg.Data[Destination.Get(msg)] = ((string)Value.Get(msg)).ToUpper();
             return msg;
         }
     }
@@ -32,7 +32,7 @@
 
         public override Event Apply(Event msg)
         {
-            var value = (string) Value.GetValue(msg);
+            var value = (string) Value.Get(msg);
             var length = Length.Get(msg);
 
             if (value.Length <= length)

@@ -12,7 +12,7 @@ namespace Ruley.Core.Outputs
         {
             if (Message != null)
             {
-                Console.WriteLine(Message.GetValue(x));
+                Console.WriteLine(Message.Get(x));
             }
             else
             {

@@ -2,9 +2,17 @@ using System;
 using Ruley.Dynamic;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
+using System.Diagnostics;
+using System.Collections.Generic;
+using System.Collections.Concurrent;
 
 namespace Ruley.Core.Outputs
 {
+    public static class RoselynCache
+    {
+        public static ConcurrentDictionary<string, Script<object>> Cache = new ConcurrentDictionary<string, Script<object>>();
+    }
+
     public class TemplatedPropertyGetter
     {
         public enum PropertyType
@@ -33,27 +41,6 @@ namespace Ruley.Core.Outputs
                 return;
             }
 
-            //if (str.StartsWith("eval(") && str.EndsWith(")"))
-            //{
-            //    _type = PropertyType.Eval;
-            //    _fieldName = str.Substring(5, str.Length - 6);
-
-            //    var scriptOptions = ScriptOptions.Default
-            //        .WithImports("System")
-            //        .WithReferences("Microsoft.CSharp");
-
-            //    _script = CSharpScript.Create<object>(_fieldName, globalsType: typeof(Globals), options: scriptOptions);
-
-            //    return;
-            //}
-
-            //if (str.StartsWith("field(") && str.EndsWith(")"))
-            //{
-            //    _type = PropertyType.Field;
-            //    _fieldName = str.Substring(6, str.Length - 7);
-            //    return;
-            //}
-
             if (str.StartsWith("=>"))
             {
                 _type = PropertyType.Eval;
@@ -64,19 +51,17 @@ namespace Ruley.Core.Outputs
                     .WithImports("System")
                     .WithReferences("Microsoft.CSharp");
 
-                _script = CSharpScript.Create<object>(_fieldName, globalsType: typeof(Globals), options: scriptOptions);
+                _script = RoselynCache.Cache.GetOrAdd(_fieldName, (k) =>
+                {
+                    return CSharpScript.Create<object>(_fieldName, globalsType: typeof(Globals), options: scriptOptions);
+                });
 
                 return;
             }
 
-            //if (str.StartsWith("text(") && str.EndsWith(")"))
-            {
-                _type = PropertyType.Template;
-                _fieldName = str;//.Substring(5, str.Length - 6);
-                return;
-            }
-            //else
-            
+            _type = PropertyType.Template;
+            _fieldName = str;//.Substring(5, str.Length - 6);
+            return;
 
             _type = PropertyType.Value;
         }

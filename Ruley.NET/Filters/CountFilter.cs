@@ -12,39 +12,50 @@ namespace Ruley.Core.Filters
         [JsonProperty(Required = Required.Always)]
         public Property<string> Field { get; set; }
 
-        [JsonProperty(Required = Required.Always)]
         public Property<long> Period { get; set; }
+
+        public Property<bool> Where { get; set; }
 
         private List<DateTime> _items = new List<DateTime>();
 
         public override Event Apply(Event msg)
         {
-            var now = DateTime.UtcNow;
-            _items.Add((DateTime)msg.Data["$created"]);
-
-            while(_items.Count > 0 && _items[0] <= (now - TimeSpan.FromMilliseconds(Period.Get(msg))))
+            if (Period != null)
             {
-                _items.RemoveAt(0);
-            }
+                var now = DateTime.UtcNow;
 
-            msg.Data.SetValue(Field.Get(msg), _items.Count);
-            return msg;
+                if (Where == null || Where.Get(msg))
+                {
+                    _items.Add((DateTime)msg.Data["$created"]);
+                }
+                else
+                {
+                    _items.Clear();
+                }
+
+                while (_items.Count > 0 && _items[0] <= (now - TimeSpan.FromMilliseconds(Period.Get(msg))))
+                {
+                    _items.RemoveAt(0);
+                }
+
+                msg.Data.SetValue(Field.Get(msg), _items.Count);
+                return msg;
+            }
+            else
+            {
+                if (Where == null || Where.Get(msg))
+                {
+                    _count++;
+                }
+                else
+                {
+                    _count = 0;
+                }
+
+                var destination = Field.Get(msg);
+                msg.Data.SetValue(destination, _count);
+                return msg;
+            }
         }
     }
-
-    //public class CountFilter : InlineFilter
-    //{
-    //    private long _count;
-
-    //    [JsonProperty(Required = Required.Always)]
-    //    public Property<string> Field { get; set; }
-
-    //    public override Event Apply(Event msg)
-    //    {
-    //        _count++;
-    //        var destination = Field.Get(msg);
-    //        msg.Data.SetValue(destination, _count);
-    //        return msg;
-    //    }
-    //}
 }

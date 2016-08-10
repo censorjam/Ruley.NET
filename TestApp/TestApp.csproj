@@ -122,13 +122,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="rules\rukle.json">
+    <None Include="rules\ignore\graphite.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="rules\ignore\rukle.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="rules\ignore\redis.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="rules\redis.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -136,6 +146,10 @@
     <ProjectReference Include="..\Ruley.NET\Ruley.NET.csproj">
       <Project>{c3ad948b-b97e-4cc3-b8be-eac7bad0e39e}</Project>
       <Name>Ruley.NET</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ruley.Redis\Ruley.Redis.csproj">
+      <Project>{ceb2ab7d-c494-4aa1-8b27-cd3736245240}</Project>
+      <Name>Ruley.Redis</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

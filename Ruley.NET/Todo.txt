@@ -1,0 +1,9 @@
+﻿
+logger liblog?
+input @parameters. rather than adding to @event
+optimise the script compile
+global @global. parameters
+
+write a graphite out client
+
+convert some filters to 
