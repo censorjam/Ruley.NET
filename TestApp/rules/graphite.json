@@ -1,0 +1,56 @@
+﻿{
+  "debug": true,
+
+  "params": [
+    {
+      "query": "alias(spreadex.services.fins.live1.*.charting_appserver.application.process_cpu_usage-%, 'CPU %')",
+      "threshold": -1,
+      "title": "Charting AppServer CPU",
+      "recipients": "marc.jones@spreadex.com" //"devops@spreadex.com;michael.carroll@spreadex.com"
+    }
+  ],
+
+  "definition": {
+    "input": {
+      "$type": "@interval",
+      "period": 5000
+    },
+
+    "filters": [
+      {
+        "$type": "@graphite",
+        "url": "http://lapgrp001:8080",
+        "query": "=> @params.query"
+      },
+      {
+        "$type": "@script",
+        "value": "@event.doAlert = @event.value > @params.threshold"
+      },
+      {
+        "$type": "@groupby",
+        "key": "=> @event.key",
+        "filters": [
+          {
+            "$type": "@if",
+            "value": "=> @event.doAlert"
+          },
+          //{
+          //  "$type": "@debounce",
+          //  "period": 60000
+          //},
+          {
+            "$type": "@email",
+            "smtp": "smtp.spreadex.com",
+            "from": "graphite-alert@spreadex.com",
+            "to": "marc.jones@spreadex.com",
+            "subject": "Alert: {title} @ {@event.value} ({@event.key})",
+            "body": "<pre>Value          {{@event.value}} <br/>At             {{@event.timestamp}}<br/>Threshold      {{@params.threshold}} <br/>Chart:         <a href='http://lapgrp001:8080/{graphitePngQuery}'>Link</a> <br/>Key            {@event.key}</pre>"
+          }
+        ]
+      }
+    ],
+
+    "outputs": [
+    ]
+  }
+}

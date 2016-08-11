@@ -7,6 +7,8 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
+            NLog.LogManager.GetLogger("dsfsdf").Debug("TEST");
+
             var rm = new RuleManager();
             rm.Start();
             Console.ReadLine();

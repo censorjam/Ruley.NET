@@ -11,23 +11,20 @@
 
   "definition": {
     "input": {
-      "$type": "@interval",
+      "$type": "@redis.info",
+      "host": "=> @event.redis_host",
+      "port": "=> @event.port",
+      "password": "=> @event.password",
       "period": 5000
     },
 
     "filters": [
       {
-        "$type": "@redis.ping",
-        "host": "=> @event.redis_host",
-        "port": "=> @event.port",
-        "password": "=> @event.password"
-      },
-      {
         "$type": "@graphite.out",
         "host": "lapgrp001",
         "port": 2023,
-        "metric": "redis.{redis_host}.ping_ms",
-        "value": "=> @event.redis_ping_ms"
+        "metric": "redis.{redis_host}.info.{property}",
+        "value": "=> @event.value"
       }
     ],
 

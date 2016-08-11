@@ -29,7 +29,7 @@
         public Property<string> Value { get; set; }
         public Property<string> Destination { get; set; }
         public Property<long> Length { get; set; }
-
+        
         public override Event Apply(Event msg)
         {
             var value = (string) Value.Get(msg);

@@ -3,7 +3,8 @@ logger liblog?
 input @parameters. rather than adding to @event
 optimise the script compile
 global @global. parameters
-
 write a graphite out client
-
-convert some filters to 
+convert some filters to input
+change merge to mutate and add add and remove values
+create a way to cast script to filter to create dynamic filters
+udp input

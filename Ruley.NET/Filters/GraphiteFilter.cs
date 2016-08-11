@@ -9,9 +9,7 @@ namespace Ruley.Core.Filters
     public class GraphiteFilter : InlineFilter
     {
         public Property<string> Query { get; set; }
-
         public Property<string> Url { get; set; }
-
         private Dictionary<string, long> _lastSent = new Dictionary<string, long>();
 
         public override Event Apply(Event msg)
@@ -31,14 +29,16 @@ namespace Ruley.Core.Filters
 
                     if (payload.graphitedata.Count == 0)
                     {
-                        Console.WriteLine("Query returned 0 datapoints");
+                        Logger.Debug("Query returned 0 datapoints");
                         return null;
                     }
 
                     foreach (var item in payload.graphitedata)
                     {
                         List<object> p = item.datapoints;// ["graphitedata"];
-                        p.Reverse();
+
+                        if (!_lastSent.ContainsKey(item.target)) //this is the first payload so take the latest value
+                            p.Reverse();
 
                         foreach (IList<object> o in p)
                         {
@@ -56,11 +56,14 @@ namespace Ruley.Core.Filters
                                 e.graphitePngQuery = query.Replace("&format=json", "&format=png");
 
                                 msg.Data.Merge(e);
+
+                                Logger.Debug(e);
                                 return msg;
                             }
                         }
                     }
                 }
+                Logger.Debug("Returning null");
                 return null;
             }
         }

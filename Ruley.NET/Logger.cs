@@ -1,21 +1,29 @@
+using Newtonsoft.Json;
+using Ruley.Dynamic;
+using Ruley.NET.Logging;
 using System;
 
 namespace Ruley.Core.Outputs
 {
     public class Logger
     {
+        private static ILog _logger = Ruley.NET.Logging.LogProvider.GetLogger("Ruley");
+
         public bool IsDebugEnabled { get; internal set; }
 
-        public void Debug(string msg)
+        public void Debug(object o)
         {
-            if (IsDebugEnabled)
-                Console.WriteLine(msg);
+            _logger.DebugFormat(JsonConvert.SerializeObject(o));
         }
 
         public void Debug(string msg, params object[] p)
         {
-            if (IsDebugEnabled)
-                Console.WriteLine(string.Format(msg, p));
+            _logger.DebugFormat(string.Format(msg, p));
+        }
+
+        public void Info(string msg, params object[] p)
+        {
+            _logger.InfoFormat(string.Format(msg, p));
         }
 
         public void Error(Exception e)

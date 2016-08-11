@@ -1,9 +1,6 @@
 using System;
-using Ruley.Dynamic;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
 
 namespace Ruley.Core.Outputs
@@ -66,7 +63,7 @@ namespace Ruley.Core.Outputs
             _type = PropertyType.Value;
         }
 
-        public object GetValue(object value, DynamicDictionary msg)
+        public object GetValue(object value, Event msg)
         {
             if (_type == PropertyType.Value)
             {
@@ -75,13 +72,14 @@ namespace Ruley.Core.Outputs
 
             if (_type == PropertyType.Field)
             {
-                return msg.GetValue(_fieldName);
+                return msg.Data.GetValue(_fieldName);
             }
 
             if (_type == PropertyType.Eval)
             {
                 var g = new Globals();
-                g.@event = msg;
+                g.@event = msg.Data;
+                g.@params = msg.Parameters;
                 object result = _script.RunAsync(g).Result.ReturnValue;
                 return result;
             }
@@ -99,5 +97,6 @@ namespace Ruley.Core.Outputs
     public class Globals
     {
         public dynamic @event;
+        public dynamic @params;
     }
 }

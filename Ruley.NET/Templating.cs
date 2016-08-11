@@ -1,3 +1,4 @@
+using Mustache;
 using SmartFormat;
 
 namespace Ruley.Core
@@ -6,7 +7,13 @@ namespace Ruley.Core
     {
         public static string ApplyTemplate(string template, object o)
         {
-            return Smart.Format(template, o);
+            FormatCompiler compiler = new FormatCompiler();
+            Generator generator = compiler.Compile(template);
+            string result = generator.Render(o);
+
+            return template;
+            //return result;
+            //return Smart.Format(template, o);
         }
     }
 }

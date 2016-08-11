@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Ruley.Dynamic;
 
 namespace Ruley.Core.Outputs
 {

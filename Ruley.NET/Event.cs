@@ -6,7 +6,28 @@ namespace Ruley.Core
 {
     public class Event
     {
+        public DynamicDictionary Parameters { get; set; }
         public DynamicDictionary Data { get; set; }
+
+        public dynamic @params { get
+            {
+                return Parameters;
+            }
+            set
+            {
+            }
+        }
+
+        public dynamic @event
+        {
+            get
+            {
+                return Data;
+            }
+            set
+            {
+            }
+        }
 
         public Event()
         {

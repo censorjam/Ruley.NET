@@ -15,7 +15,7 @@ namespace Ruley.Core
     {
         internal string FileName { get; set; }
         public bool Debug { get; set; }
-        public List<JObject> Parameters { get; set; }
+        public List<JObject> Params { get; set; }
         public Rule Definition { get; set; }
 
         private List<Rule> _rules = new List<Rule>();
@@ -27,10 +27,10 @@ namespace Ruley.Core
 
         public void Start()
         {
-            if (Parameters == null)
-                Parameters = new List<JObject>() { new JObject() };
+            if (Params == null)
+                Params = new List<JObject>() { new JObject() };
 
-            foreach (var obj in Parameters)
+            foreach (var obj in Params)
             {
                 var rule = JsonConvert.DeserializeObject<Rule>(JsonConvert.SerializeObject(Definition, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto }), new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto });
                 _rules.Add(rule);
@@ -55,7 +55,7 @@ namespace Ruley.Core
         public List<Output> Outputs { get; set; }
         public List<Filter> Filters { get; set; }
         public event Action<Exception> OnError;
-        public DynamicDictionary Parameters { get; set; }
+        public DynamicDictionary Parameters { get; set; } //todo make this readonly
 
         internal void Validate()
         {
@@ -70,7 +70,7 @@ namespace Ruley.Core
 
         public Event GetNext()
         {
-            return Event.Create(Parameters.Clone());
+            return new Event() { Parameters = Parameters };
         }
 
         private List<Component> GetComponents()
