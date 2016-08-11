@@ -139,10 +139,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="rules\graphite.json">
+    <None Include="rules\ignore\graphite.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="rules\ignore\rukle.json">
+    <None Include="rules\rukle.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="rules\ignore\redis_latency.json">

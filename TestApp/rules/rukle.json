@@ -56,7 +56,7 @@
         "value": "=> @event.text == 'helloworld'",
         "then": {
           "$type": "@consolef",
-          "message": "{text} helloworld"
+          "message": "{{@event.text}} helloworld"
         }
       },
       {
