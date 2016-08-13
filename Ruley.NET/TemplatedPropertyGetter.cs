@@ -78,8 +78,8 @@ namespace Ruley.Core.Outputs
             if (_type == PropertyType.Eval)
             {
                 var g = new Globals();
-                g.@event = msg.Data;
-                g.@params = msg.Parameters;
+                g.e = msg.Data;
+                g.p = msg.Parameters;
                 object result = _script.RunAsync(g).Result.ReturnValue;
                 return result;
             }
@@ -96,7 +96,7 @@ namespace Ruley.Core.Outputs
 
     public class Globals
     {
-        public dynamic @event;
-        public dynamic @params;
+        public dynamic e;
+        public dynamic p;
     }
 }

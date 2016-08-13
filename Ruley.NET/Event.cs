@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using Ruley.Dynamic;
 
-namespace Ruley.Core
+namespace Ruley
 {
     public class Event
     {

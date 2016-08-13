@@ -157,6 +157,10 @@
       <HintPath>..\packages\System.Xml.XPath.XDocument.4.0.1\lib\net46\System.Xml.XPath.XDocument.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="YamlDotNet, Version=3.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.3.9.0\lib\net35\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Packages\LibLog.4.2\LibLog.cs" />
@@ -166,12 +170,14 @@
     <Compile Include="Dynamic\JsonHelper.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Filters\BlockFilter.cs" />
-    <Compile Include="Filters\BranchFilter.cs" />
+    <Compile Include="Stages\IfStage.cs" />
     <Compile Include="Filters\ChainFilter.cs" />
     <Compile Include="Filters\ConcatenateFilter.cs" />
-    <Compile Include="Filters\ConsoleFilter.cs" />
-    <Compile Include="Filters\CountFilter.cs" />
-    <Compile Include="Filters\DebounceFilter.cs" />
+    <Compile Include="Filters\PrimaryAttribute.cs" />
+    <Compile Include="StageBuilder.cs" />
+    <Compile Include="Stages\ConsoleFilter.cs" />
+    <Compile Include="Stages\CountStage.cs" />
+    <Compile Include="Stages\DebounceStage.cs" />
     <Compile Include="Filters\DeleteFilter.cs" />
     <Compile Include="Filters\DistinctFilter.cs" />
     <Compile Include="Filters\DistinctTests.cs" />
@@ -191,7 +197,7 @@
     <Compile Include="Filters\MergeTests.cs" />
     <Compile Include="Filters\MessageBusFilter.cs" />
     <Compile Include="Filters\PassThroughFilter.cs" />
-    <Compile Include="Filters\PrevFilter.cs" />
+    <Compile Include="Stages\PrevFilter.cs" />
     <Compile Include="Filters\PropertyConverter.cs" />
     <Compile Include="Filters\RegexFilter.cs" />
     <Compile Include="Filters\ReplaceFilter.cs" />
@@ -203,6 +209,8 @@
     <Compile Include="Filters\TimestampFilter.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="IntervalInput.cs" />
+    <Compile Include="Stages\ConsoleStage.cs" />
+    <Compile Include="Stages\IntervalStage.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MessageBus.cs" />
     <Compile Include="ObservableFileWatcher.cs" />
@@ -218,9 +226,11 @@
     <Compile Include="RxExtensions.cs" />
     <Compile Include="SlackClient.cs" />
     <Compile Include="SlackOutput.cs" />
+    <Compile Include="Stage.cs" />
     <Compile Include="TemplatedPropertyGetter.cs" />
     <Compile Include="Templating.cs" />
     <Compile Include="TestInput.cs" />
+    <Compile Include="TimeSpanDeserializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

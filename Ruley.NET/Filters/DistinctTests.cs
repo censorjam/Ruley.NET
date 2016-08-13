@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using Ruley.Dynamic;
+using Ruley;
 
 namespace Ruley.Core.Filters
 {

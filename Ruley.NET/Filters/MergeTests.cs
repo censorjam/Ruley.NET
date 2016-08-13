@@ -1,6 +1,5 @@
 ﻿using System.Runtime.InteropServices.WindowsRuntime;
 using NUnit.Framework;
-using Ruley.Dynamic;
 
 namespace Ruley.Core.Filters
 {

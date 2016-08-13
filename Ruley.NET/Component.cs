@@ -1,13 +1,10 @@
 using System;
 using Newtonsoft.Json;
-using Ruley.Dynamic;
 
-namespace Ruley.Core.Outputs
+namespace Ruley
 {
     public abstract class Component : IDisposable
     {
-        public Rule Context { get; internal set; }
-
         public Component()
         {
             Logger = new Logger();
@@ -32,8 +29,6 @@ namespace Ruley.Core.Outputs
 
         public virtual void ValidateComposition()
         {
-            if (Context == null)
-                throw new ArgumentNullException("Context is null");
         }
 
         //protected T Get<T>(object value, Event msg)

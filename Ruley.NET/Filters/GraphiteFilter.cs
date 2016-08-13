@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
-using Ruley.Dynamic;
 using System.Net.Http;
+using Ruley;
+using Ruley.Core.Filters;
 
-namespace Ruley.Core.Filters
+namespace Ruley
 {
     public class GraphiteFilter : InlineFilter
     {
+        [Primary]
         public Property<string> Query { get; set; }
         public Property<string> Url { get; set; }
+
         private Dictionary<string, long> _lastSent = new Dictionary<string, long>();
 
         public override Event Apply(Event msg)

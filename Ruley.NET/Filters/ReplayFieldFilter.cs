@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Ruley.Dynamic;
 
 namespace Ruley.Core.Filters
 {

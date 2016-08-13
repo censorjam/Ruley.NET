@@ -7,7 +7,8 @@ using Newtonsoft.Json.Linq;
 using Ruley.Core.Filters;
 using Ruley.Core.Inputs;
 using Ruley.Core.Outputs;
-using Ruley.Dynamic;
+using YamlDotNet.Serialization.ObjectGraphVisitors;
+using System.Reflection;
 
 namespace Ruley.Core
 {
@@ -45,6 +46,57 @@ namespace Ruley.Core
             
         }
     }
+
+    public class Pipeline : Stage
+    {
+        public List<Stage> Stages { get; set; }
+
+        public Pipeline()
+        {
+            Stages = new List<Stage>();
+        }
+
+        public override Stage NextStage
+        {
+            get { return Stages[Stages.Count - 1].NextStage; }
+            set { Stages[Stages.Count - 1].NextStage = value; }
+        }
+
+        public static Pipeline FromDynamic(dynamic def)
+        {
+            var chain = new Pipeline();
+
+            Stage prev = null;
+            foreach (var f in def)
+            {
+                var stage = StageBuilder.Resolve(f);
+                chain.Stages.Add(stage);
+
+                if (prev != null)
+                {
+                    prev.NextStage = stage;
+                }
+
+                prev = stage;
+            }
+            return chain;
+        }
+
+        public override void Next(Event e)
+        {
+            Stages[0].Next(e);
+        }
+
+        public override void Start()
+        {
+            //reverse order?
+            foreach (var stage in Stages)
+            {
+                stage.Start();
+            }
+        }
+    }
+
 
     public class Rule : IDisposable
     {
@@ -95,7 +147,7 @@ namespace Ruley.Core
             GetComponents().ForEach(c =>
             {
                 c.Logger = new Logger {IsDebugEnabled = Debug || c.Debug};
-                c.Context = this; //todo need to propogate this to children
+                //c.Context = this; //todo need to propogate this to children
             });
 
             var stream = Input.Source;

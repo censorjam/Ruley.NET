@@ -1,12 +1,11 @@
 ﻿using System.Dynamic;
 using Newtonsoft.Json;
-using Ruley.Dynamic;
 
-namespace Ruley.Core.Filters
+namespace Ruley
 {
-    public class PrevFilter : InlineFilter
+    public class PrevStage : InlineStage
     {
-        [JsonProperty(Required = Required.Always)]
+        [Primary]
         public Property<string> Field { get; set; }
 
         private DynamicDictionary _prev;

@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Ruley.Core.Outputs;
-using Ruley.Dynamic;
 
 namespace Ruley.Core.Filters
 {

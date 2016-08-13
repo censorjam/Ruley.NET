@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using Newtonsoft.Json;
 
-namespace Ruley.Core.Filters
+namespace Ruley
 {
-    public class ConsoleFilter : InlineFilter
+    public class ConsoleStage : InlineStage
     {
+        [Primary]
         public Property<string> Message { get; set; }
 
         public override Event Apply(Event x)

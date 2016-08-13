@@ -1,8 +1,7 @@
 ﻿using System;
 using Ruley.Core.Outputs;
-using Ruley.Dynamic;
 
-namespace Ruley.Core
+namespace Ruley
 {
     public class Property<T>
     {
@@ -29,7 +28,22 @@ namespace Ruley.Core
         public Property(object value)
         {
             Value = value;
-            _getter = new TemplatedPropertyGetter(value);
+
+            if (value is string && typeof(T) == typeof(long))
+            {
+                long l;
+                if (long.TryParse((string)value, out l))
+                {
+                    Value = l;
+                }
+            }
+
+            if (value is string && typeof(T) == typeof(TimeSpan))
+            {
+                Value = TimeSpanDeserializer.Deserialize((string)value);
+            }
+
+            _getter = new TemplatedPropertyGetter(Value);
         }
 
         public static implicit operator string(Property<T> d)
@@ -39,6 +53,8 @@ namespace Ruley.Core
 
         public static implicit operator Property<T>(string d)
         {
+           
+
             return new Property<T>(d);
         }
 
@@ -94,9 +110,6 @@ namespace Ruley.Core
 
         public T Get(Event @event)
         {
-            if (@event == null)
-                throw new ArgumentNullException("event");
-
             return (T)_getter.GetValue(Value, @event);
         }
 

@@ -5,7 +5,6 @@ using System.Reactive.Subjects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Ruley.Core.Outputs;
-using Ruley.Dynamic;
 
 namespace Ruley.Core.Inputs
 {
@@ -23,12 +22,12 @@ namespace Ruley.Core.Inputs
 
         public void OnNext(DynamicDictionary next)
         {
-            var ev = Context.GetNext();
-            ev.Data.Merge(next);
-            lock (_lock)
-            {
-                _subject.OnNext(ev);
-            }
+            //var ev = Context.GetNext();
+            //ev.Data.Merge(next);
+            //lock (_lock)
+            //{
+            //    _subject.OnNext(ev);
+            //}
         }
 
         public ExpandoObject ToExpando(object obj)

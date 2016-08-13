@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Newtonsoft.Json.Linq;
 
-namespace Ruley.Dynamic
+namespace Ruley
 {
     public static class JsonHelper
     {

@@ -1,9 +1,8 @@
 using Newtonsoft.Json;
-using Ruley.Dynamic;
 using Ruley.NET.Logging;
 using System;
 
-namespace Ruley.Core.Outputs
+namespace Ruley
 {
     public class Logger
     {

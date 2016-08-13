@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using Newtonsoft.Json;
 
-namespace Ruley.Dynamic
+namespace Ruley
 {
     public class DynamicDictionary : DynamicObject, IDictionary<string, object>
     {

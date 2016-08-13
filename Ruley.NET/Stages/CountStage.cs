@@ -1,19 +1,16 @@
-﻿using System.Dynamic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System;
 
-namespace Ruley.Core.Filters
+namespace Ruley
 {
-    public class CountFilter : InlineFilter
+    public class CountStage : InlineStage
     {
         private long _count;
         
         [JsonProperty(Required = Required.Always)]
         public Property<string> Field { get; set; }
-
-        public Property<long> Period { get; set; }
-
+        public Property<TimeSpan> Period { get; set; }
         public Property<bool> Where { get; set; }
 
         private List<DateTime> _items = new List<DateTime>();
@@ -33,7 +30,7 @@ namespace Ruley.Core.Filters
                     _items.Clear();
                 }
 
-                while (_items.Count > 0 && _items[0] <= (now - TimeSpan.FromMilliseconds(Period.Get(msg))))
+                while (_items.Count > 0 && _items[0] <= (now - Period.Get(msg)))
                 {
                     _items.RemoveAt(0);
                 }
