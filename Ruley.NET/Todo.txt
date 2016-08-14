@@ -8,3 +8,4 @@ convert some filters to input
 change merge to mutate and add add and remove values
 create a way to cast script to filter to create dynamic filters
 udp input
+onerror - make a pipeline

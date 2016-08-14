@@ -11,14 +11,23 @@ parameters:
 
 definition:
 
-  - interval:   3s
-  - debounce:   1s
-  - count:      countField
-    period:     5s
+  - interval:   1s
+  - console:    "Count is {{@event.countField}}"
+  - console:    hello world
+  - console:    hello world
+  - console:    hello world
+
+#  - interval:   1s
+#  - count:      countField
+#    period:     5s
 #  - if:         => true
 #    then:
 #      - console:    shit the bed
+
+
+#  - script:     e.
+
 #  - prev:       prev
 #  - where:      => e.prev != null && e.countField != e.prev.countField
-  - console:    "Count is {{@event.countField}}"
- 
+
+#  - console:    "Count is {{@event.countField}}"

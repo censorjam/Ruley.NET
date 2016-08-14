@@ -1,27 +1,27 @@
 using System;
 using System.Threading;
 using Ruley;
+using System.Reactive.Linq;
 
 namespace Ruley
 {
     public class IntervalStage : Stage
     {
         public Property<TimeSpan> Period { get; set; }
-        private Timer _timer;
 
         public override void Start()
         {
-            _timer = new Timer(state =>
+            var p = Period.Get(null);
+            Observable.Timer(TimeSpan.Zero, p).Subscribe(l =>
             {
                 Logger.Debug("Tick");
-                OnNext(new Event(new DynamicDictionary()));
+                OnNext(new Event());
             });
-            _timer.Change(0, (int)Period.Get(null).TotalMilliseconds);
         }
 
-        public override void Next(Event e)
+        public override void OnNext(Event e)
         {
-            OnNext(e);
+            PushNext(e);
         }
     }
 }

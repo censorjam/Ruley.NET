@@ -1,4 +1,7 @@
-﻿namespace Ruley
+﻿using System.Reactive;
+using System.Reactive.Linq;
+
+namespace Ruley
 {
     public class PassThroughStage : InlineStage
     {
@@ -18,7 +21,6 @@
 
     public class WhereStage : IfStage
     {
-        
     }
 
     public class IfStage : Stage
@@ -36,25 +38,25 @@
 
         public override void Start()
         {
-            Then.NextStage = this.NextStage;
-            this.NextStage = null;     
-            
+            Then.Subscribe(new AnonymousObserver<Event>(PushNext));
+            Else.Subscribe(new AnonymousObserver<Event>(PushNext));
+
             Then.Start();
             Else.Start();   
         }
 
-        public override void Next(Event x)
+        public override void OnNext(Event x)
         {
             var match = Value.Get(x);
             if (match)
             {
                 Logger.Debug("True");
-                Then.Next(x);
+                Then.OnNext(x);
             }
             else
             {
                 Logger.Debug("False");
-                Else.Next(x);
+                Else.OnNext(x);
             }
         }
     }

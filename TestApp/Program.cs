@@ -34,6 +34,11 @@ namespace TestApp
 
             var p = Pipeline.FromDynamic(order.Definition);
 
+            p.Subscribe(x =>
+            {
+                Console.WriteLine("dfsdfdsf");
+            }, (Exception e) => Console.WriteLine(e));
+
             p.Start();
 
             Console.ReadLine();

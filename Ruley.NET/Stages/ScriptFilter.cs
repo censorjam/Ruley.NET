@@ -5,9 +5,10 @@ using Ruley.Core.Outputs;
 
 namespace Ruley.Core.Filters
 {
-    public class ScriptFilter : InlineFilter
+    public class ScriptStage : InlineStage
     {
         [JsonRequired]
+        [Primary]
         public Property<string> Value { get; set; }
         private Script<object> _script = null;
  
@@ -23,7 +24,7 @@ namespace Ruley.Core.Filters
                         .WithImports("System")
                         .WithReferences("Microsoft.CSharp");
 
-                    _script = CSharpScript.Create<object>(Value.Get(msg).Replace("'","\""), globalsType: typeof(Globals), options: scriptOptions);
+                    _script = CSharpScript.Create<object>(Value.Get(msg), globalsType: typeof(Globals), options: scriptOptions);
                 }
             }
 

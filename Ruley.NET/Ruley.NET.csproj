@@ -170,12 +170,13 @@
     <Compile Include="Dynamic\JsonHelper.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Filters\BlockFilter.cs" />
+    <Compile Include="Pipeline.cs" />
     <Compile Include="Stages\IfStage.cs" />
     <Compile Include="Filters\ChainFilter.cs" />
     <Compile Include="Filters\ConcatenateFilter.cs" />
     <Compile Include="Filters\PrimaryAttribute.cs" />
     <Compile Include="StageBuilder.cs" />
-    <Compile Include="Stages\ConsoleFilter.cs" />
+    <Compile Include="Stages\InlineStage.cs" />
     <Compile Include="Stages\CountStage.cs" />
     <Compile Include="Stages\DebounceStage.cs" />
     <Compile Include="Filters\DeleteFilter.cs" />
@@ -202,7 +203,7 @@
     <Compile Include="Filters\RegexFilter.cs" />
     <Compile Include="Filters\ReplaceFilter.cs" />
     <Compile Include="Filters\ReplayFieldFilter.cs" />
-    <Compile Include="Filters\ScriptFilter.cs" />
+    <Compile Include="Stages\ScriptFilter.cs" />
     <Compile Include="Filters\SkipFIlter.cs" />
     <Compile Include="Filters\SlackFilter.cs" />
     <Compile Include="Filters\ThrottleFilter.cs" />

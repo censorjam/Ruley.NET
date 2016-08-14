@@ -1,22 +1,43 @@
+using System;
+using System.Reactive.Subjects;
+
 namespace Ruley
 { 
-    public abstract class Stage : Component
+    public abstract class Stage : Component, IObservable<Event>, IObserver<Event>
     {
-        public virtual Stage NextStage { get; set; }
+        private Subject<Event> _subject = new Subject<Event>();
 
         public virtual void Start()
         {
             
         }
 
-        public virtual void Next(Event e)
+        public void PushNext(Event e)
         {
+            Logger.Debug("Pushing next from {0}", this.GetType().Name);
+            _subject.OnNext(e);
         }
 
-        public void OnNext(Event e)
+        public IDisposable Subscribe(IObserver<Event> observer)
         {
-            if (NextStage != null)
-                NextStage.Next(e);
+            Logger.Debug("Subscribing to {0}", this.GetType().Name);
+            return _subject.Subscribe(observer);
+        }
+
+        public virtual void OnNext(Event value)
+        {
+            PushNext(value);
+        }
+
+        public void OnError(Exception error)
+        {
+            Logger.Debug("error");
+            _subject.OnError(error);
+        }
+
+        public void OnCompleted()
+        {
+            throw new NotImplementedException();
         }
     }
 }
