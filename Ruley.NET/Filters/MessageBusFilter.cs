@@ -19,7 +19,7 @@ namespace Ruley.Core.Filters
 
         public override void Start()
         {
-            RuleManager.MessageBus.Subscribe(Key, x => { OnNext(x.Data); });
+            RuleManager.MessageBus.Subscribe(Key, x => { OnNext(x); });
         }
     }
 }

@@ -10,12 +10,16 @@ namespace Ruley
             Logger = new Logger();
         }
 
+
+
         private bool _enabled = true;
         public bool Enabled
         {
             get { return _enabled; }
             set { _enabled = value; }
         }
+
+		public Context Ctx { get; set; }
 
         public bool Debug { get; set; }
 

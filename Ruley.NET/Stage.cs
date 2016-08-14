@@ -2,7 +2,10 @@ using System;
 using System.Reactive.Subjects;
 
 namespace Ruley
-{ 
+{
+
+
+
     public abstract class Stage : Component, IObservable<Event>, IObserver<Event>
     {
         private Subject<Event> _subject = new Subject<Event>();
@@ -31,12 +34,13 @@ namespace Ruley
 
         public void OnError(Exception error)
         {
-            Logger.Debug("error");
+            Logger.Error(error);
             _subject.OnError(error);
         }
 
         public void OnCompleted()
         {
+            Logger.Debug("completed");
             throw new NotImplementedException();
         }
     }

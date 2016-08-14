@@ -1,11 +1,17 @@
-using System;
+using Ruley.Core;
 using System.Collections.Generic;
-using System.Reactive;
-using System.Reactive.Linq;
 
-namespace Ruley.Core
+namespace Ruley
 {
-    public class Pipeline : Stage
+	public class Context
+	{
+		public Event GetNextEvent()
+		{
+			return new Event();
+		}
+	}
+
+	public class Pipeline : Stage
     {
         public List<Stage> Stages { get; set; }
 
@@ -14,25 +20,7 @@ namespace Ruley.Core
             Stages = new List<Stage>();
         }
 
-        public static Pipeline FromDynamic(dynamic def)
-        {
-            var chain = new Pipeline();
-
-            Stage prev = null;
-            foreach (var f in def)
-            {
-                Stage stage = StageBuilder.Resolve(f);
-                chain.Stages.Add(stage);
-
-                if (prev != null)
-                {
-                    prev.;
-                }
-
-                prev = stage;
-            }
-            return chain;
-        }
+		
 
         public override void OnNext(Event e)
         {

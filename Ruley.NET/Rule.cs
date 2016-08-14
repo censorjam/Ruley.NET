@@ -35,7 +35,7 @@ namespace Ruley.Core
             {
                 var rule = JsonConvert.DeserializeObject<Rule>(JsonConvert.SerializeObject(Definition, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto }), new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto });
                 _rules.Add(rule);
-                rule.Parameters = DynamicDictionary.Create(obj);
+              //  rule.Parameters = Event.Create(obj);
                 rule.Name = FileName;
                 rule.Start();
             }
@@ -57,7 +57,7 @@ namespace Ruley.Core
         public List<Output> Outputs { get; set; }
         public List<Filter> Filters { get; set; }
         public event Action<Exception> OnError;
-        public DynamicDictionary Parameters { get; set; } //todo make this readonly
+        public Event Parameters { get; set; } //todo make this readonly
 
         internal void Validate()
         {
@@ -68,11 +68,6 @@ namespace Ruley.Core
                 throw new Exception("Rules require one or more outputs");
 
             GetComponents().ForEach(f => f.ValidateComposition());
-        }
-
-        public Event GetNext()
-        {
-            return new Event() { Parameters = Parameters };
         }
 
         private List<Component> GetComponents()

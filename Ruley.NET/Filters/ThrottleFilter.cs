@@ -36,7 +36,7 @@ namespace Ruley.Core.Filters
                 msgs = new List<Event> { new Event() };
             }
 
-            msgs[0].Data.SetValue(CountField ?? "count", count);
+            msgs[0].SetValue(CountField ?? "count", count);
             return msgs[0];
         }
     }

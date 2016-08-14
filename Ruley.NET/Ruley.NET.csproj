@@ -167,20 +167,18 @@
     <Compile Include="Component.cs" />
     <Compile Include="ConsoleOutput.cs" />
     <Compile Include="Dynamic\DynamicDictionary.cs" />
+    <Compile Include="Dynamic\Event.cs" />
     <Compile Include="Dynamic\JsonHelper.cs" />
-    <Compile Include="Event.cs" />
     <Compile Include="Filters\BlockFilter.cs" />
     <Compile Include="Pipeline.cs" />
     <Compile Include="Stages\IfStage.cs" />
     <Compile Include="Filters\ChainFilter.cs" />
-    <Compile Include="Filters\ConcatenateFilter.cs" />
     <Compile Include="Filters\PrimaryAttribute.cs" />
-    <Compile Include="StageBuilder.cs" />
+    <Compile Include="YamlParsing\StageBuilder.cs" />
     <Compile Include="Stages\InlineStage.cs" />
     <Compile Include="Stages\CountStage.cs" />
     <Compile Include="Stages\DebounceStage.cs" />
-    <Compile Include="Filters\DeleteFilter.cs" />
-    <Compile Include="Filters\DistinctFilter.cs" />
+    <Compile Include="Filters\DistinctStage.cs" />
     <Compile Include="Filters\DistinctTests.cs" />
     <Compile Include="Filters\EmailFilter.cs" />
     <Compile Include="Filters\Filter.cs" />
@@ -194,7 +192,7 @@
     <Compile Include="Filters\Jsonify.cs" />
     <Compile Include="Filters\LowerCaseFilter.cs" />
     <Compile Include="Filters\MapFilter.cs" />
-    <Compile Include="Filters\MergeFilter.cs" />
+    <Compile Include="Stages\MergeFilter.cs" />
     <Compile Include="Filters\MergeTests.cs" />
     <Compile Include="Filters\MessageBusFilter.cs" />
     <Compile Include="Filters\PassThroughFilter.cs" />
@@ -230,8 +228,8 @@
     <Compile Include="Stage.cs" />
     <Compile Include="TemplatedPropertyGetter.cs" />
     <Compile Include="Templating.cs" />
-    <Compile Include="TestInput.cs" />
     <Compile Include="TimeSpanDeserializer.cs" />
+    <Compile Include="YamlParsing\Helper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

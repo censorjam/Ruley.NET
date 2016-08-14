@@ -98,12 +98,12 @@ namespace Ruley
             return new Property<T>(d);
         }
 
-        public static implicit operator DynamicDictionary(Property<T> d)
+        public static implicit operator Event(Property<T> d)
         {
             throw new Exception("Invalid cast");
         }
 
-        public static implicit operator Property<T>(DynamicDictionary d)
+        public static implicit operator Property<T>(Event d)
         {
             return new Property<T>(d);
         }

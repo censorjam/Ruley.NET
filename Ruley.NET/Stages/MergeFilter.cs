@@ -3,10 +3,12 @@ using Ruley.Core.Outputs;
 
 namespace Ruley.Core.Filters
 {
-    public class MergeFilter : InlineFilter
+    public class MergeStage : InlineStage
     {
+		//needs to filter out $ fields!
         [JsonRequired]
-        public DynamicDictionary Value { get; set; }
+        [Primary]
+        public Event Value { get; set; }
         
         public override Event Apply(Event e)
         {
@@ -17,11 +19,11 @@ namespace Ruley.Core.Filters
                 {
                     //todo cache this
                     var g = new TemplatedPropertyGetter(str);
-                    e.Data[v.Key] = g.GetValue(str, e);
+                    e[v.Key] = g.GetValue(str, e);
                 }
                 else
                 {
-                    e.Data[v.Key] = v.Value;
+                    e[v.Key] = v.Value;
                 }
             }
             return e;

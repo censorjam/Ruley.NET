@@ -7,6 +7,7 @@ namespace Ruley
 {
     public class IntervalStage : Stage
     {
+		[Primary]
         public Property<TimeSpan> Period { get; set; }
 
         public override void Start()

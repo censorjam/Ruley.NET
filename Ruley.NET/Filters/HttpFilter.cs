@@ -29,7 +29,7 @@ namespace Ruley.Core.Filters
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", encoded);
                 }
 
-                dynamic data = ev.Data;
+                dynamic data = ev;
                 try
                 {
                     string url;

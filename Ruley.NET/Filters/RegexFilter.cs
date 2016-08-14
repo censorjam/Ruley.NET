@@ -16,7 +16,7 @@ namespace Ruley.Core.Filters
             if (_regex == null)
                 _regex = new Regex(Expression, RegexOptions.IgnoreCase);
 
-            var value = msg.Data.GetValue(Field.Get(msg));
+            var value = msg.GetValue(Field.Get(msg));
             var valueStr = value as string;
 
             if (valueStr == null)
@@ -27,7 +27,7 @@ namespace Ruley.Core.Filters
 
             if (Destination != null)
             {
-                msg.Data.SetValue(Destination.Get(msg), match);
+                msg.SetValue(Destination.Get(msg), match);
             }
 
             if (AllowNonMatches || match)

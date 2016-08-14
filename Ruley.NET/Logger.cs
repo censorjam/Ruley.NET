@@ -6,7 +6,7 @@ namespace Ruley
 {
     public class Logger
     {
-        private static ILog _logger = Ruley.NET.Logging.LogProvider.GetLogger("Ruley");
+        private static ILog _logger = LogProvider.GetLogger("Ruley");
 
         public bool IsDebugEnabled { get; internal set; }
 
@@ -27,7 +27,7 @@ namespace Ruley
 
         public void Error(Exception e)
         {
-            Console.WriteLine(e);
+            _logger.ErrorException("", e);
         }
 
         public void Error(string msg, params object[] p)

@@ -72,14 +72,13 @@ namespace Ruley.Core.Outputs
 
             if (_type == PropertyType.Field)
             {
-                return msg.Data.GetValue(_fieldName);
+                return msg.GetValue(_fieldName);
             }
 
             if (_type == PropertyType.Eval)
             {
                 var g = new Globals();
-                g.e = msg.Data;
-                g.p = msg.Parameters;
+                g.e = msg;
                 object result = _script.RunAsync(g).Result.ReturnValue;
                 return result;
             }
@@ -97,6 +96,5 @@ namespace Ruley.Core.Outputs
     public class Globals
     {
         public dynamic e;
-        public dynamic p;
     }
 }

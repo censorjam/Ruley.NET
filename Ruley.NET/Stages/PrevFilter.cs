@@ -8,12 +8,12 @@ namespace Ruley
         [Primary]
         public Property<string> Field { get; set; }
 
-        private DynamicDictionary _prev;
+        private Event _prev;
 
         public override Event Apply(Event msg)
         {
-            msg.Data.SetValue(Field.Get(msg), _prev);
-            _prev = msg.Data.Clone();
+            msg.SetValue(Field.Get(msg), _prev);
+            _prev = msg.Clone();
             _prev.Remove(Field.Get(msg));
             return msg;
         }

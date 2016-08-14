@@ -40,7 +40,7 @@ namespace Ruley.Redis
                     }
                     catch (Exception e)
                     {
-                        dynamic m = msg.Data;
+                        dynamic m = msg;
                         m.exception = e;
                         m.ping = null;
                         m.redis_ping_ms = null;
@@ -52,7 +52,7 @@ namespace Ruley.Redis
             try
             {
                 var elapsed = _server.Ping();
-                dynamic payload = msg.Data;
+                dynamic payload = msg;
                 payload.exception = null;
                 payload.ping = elapsed;
                 payload.redis_ping_ms = elapsed.TotalMilliseconds;
@@ -60,7 +60,7 @@ namespace Ruley.Redis
             }
             catch (Exception e)
             {
-                dynamic m = msg.Data;
+                dynamic m = msg;
                 m.exception = e;
                 m.ping = null;
                 m.pingMs = null;
@@ -111,7 +111,7 @@ namespace Ruley.Redis
             {
                 foreach (var k in x)
                 {
-                    dynamic payload = new DynamicDictionary();
+                    dynamic payload = new Event();
                     payload.property = k.Key;
 
                     double v;

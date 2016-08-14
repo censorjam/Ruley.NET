@@ -9,10 +9,10 @@ namespace Ruley.Core.Filters
     public class Mapping
     {
         public object Key { get; set; }
-        public DynamicDictionary Value { get; set; }
+        public Event Value { get; set; }
     }
 
-    public class MapFilter : InlineFilter
+    public class MapStage : InlineStage
     {
         [JsonProperty(Required = Required.Always)]
         public Property<string> Value { get; set; }
@@ -20,7 +20,7 @@ namespace Ruley.Core.Filters
         public Property<bool> IgnoreCase { get; set; }
         public Property<bool> RegexMatch { get; set; }
 
-        private DynamicDictionary _default { get; set; }
+        private Event _default { get; set; }
 
         [JsonProperty(Required = Required.Always)]
         public JObject Map { get; set; }

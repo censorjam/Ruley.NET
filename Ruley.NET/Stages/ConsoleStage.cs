@@ -10,13 +10,19 @@ namespace Ruley
 
         public override Event Apply(Event x)
         {
+            string msg = null;
             if (Message != null)
             {
-                Console.WriteLine(Message.Get(x));
+                msg = Message.Get(x);
+            }
+
+            if (msg == null)
+            {
+                Console.WriteLine(JsonConvert.SerializeObject(x, Formatting.Indented));
             }
             else
             {
-                Console.WriteLine(JsonConvert.SerializeObject(x.Data, Formatting.Indented));
+                Console.WriteLine(Message.Get(x));
             }
             return x;
         }

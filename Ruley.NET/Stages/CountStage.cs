@@ -9,10 +9,12 @@ namespace Ruley
         private long _count;
         
         [JsonProperty(Required = Required.Always)]
+		[Primary]
         public Property<string> Field { get; set; }
-        public Property<TimeSpan> Period { get; set; }
-        public Property<bool> Where { get; set; }
 
+		public Property<TimeSpan> Period { get; set; }
+
+        public Property<bool> Where { get; set; }
         private List<DateTime> _items = new List<DateTime>();
 
         public override Event Apply(Event msg)
@@ -23,7 +25,7 @@ namespace Ruley
 
                 if (Where == null || Where.Get(msg))
                 {
-                    _items.Add((DateTime)msg.Data["$created"]);
+                    _items.Add(DateTime.UtcNow);
                 }
                 else
                 {
@@ -35,7 +37,7 @@ namespace Ruley
                     _items.RemoveAt(0);
                 }
 
-                msg.Data.SetValue(Field.Get(msg), _items.Count);
+                msg.SetValue(Field.Get(msg), _items.Count);
                 return msg;
             }
             else
@@ -49,8 +51,7 @@ namespace Ruley
                     _count = 0;
                 }
 
-                var destination = Field.Get(msg);
-                msg.Data.SetValue(destination, _count);
+                msg.SetValue(Field.Get(msg), _count);
                 return msg;
             }
         }

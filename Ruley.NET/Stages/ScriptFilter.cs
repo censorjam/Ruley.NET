@@ -7,7 +7,6 @@ namespace Ruley.Core.Filters
 {
     public class ScriptStage : InlineStage
     {
-        [JsonRequired]
         [Primary]
         public Property<string> Value { get; set; }
         private Script<object> _script = null;
@@ -29,8 +28,7 @@ namespace Ruley.Core.Filters
             }
 
             var g = new Globals();
-            g.e = msg.Data;
-            g.p = msg.Parameters;
+            g.e = msg;
             _script.RunAsync(g).Wait();
 
             return msg;

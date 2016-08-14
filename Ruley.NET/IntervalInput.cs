@@ -33,7 +33,7 @@ namespace Ruley.Core.Inputs
 
         public virtual void OnTick()
         {
-            OnNext(new DynamicDictionary());
+            OnNext(new Event());
         }
     }
 }

@@ -1,33 +1,25 @@
 ﻿--- 
 parameters:
-  - query:      alias(spreadex.services.fins.live1.*.charting_appserver.application.process_cpu_usage-%, 'CPU %')
-    threshold:  -1
-    title:      Charting AppServer CPU
-    recipients: marc.jones@spreadex.com
-  - query:      alias(spreadex.services.fins.live1.*.charting_appserver.application.process_cpu_usage-%, 'CPU %')
-    threshold:  -1
-    title:      Charting AppServer CPU
-    recipients: marc.jones@spreadex.com
 
+  - query:      alias(spreadex.services.fins.live1.*.charting_appserver.application.process_cpu_usage-%, 'CPU %')
+    threshold:  -1
+    title:      Charting AppServer CPU
+    recipients: marc.jones@spreadex.com
+    test:   
+      username:   test1
+      password:   password1
+      
+  - query:      alias(spreadex.services.fins.live1.*.charting_appserver.application.process_cpu_usage-%, 'CPU %')
+    threshold:  -1
+    title:      Charting AppServer CPU
+    recipients: marc.jones@spreadex.com
+    
 definition:
 
   - interval:   1s
-  - console:    "Count is {{@event.countField}}"
-  - console:    hello world
-  - console:    hello world
-  - console:    hello world
-
-#  - interval:   1s
-#  - count:      countField
-#    period:     5s
-#  - if:         => true
-#    then:
-#      - console:    shit the bed
-
-
-#  - script:     e.
-
-#  - prev:       prev
-#  - where:      => e.prev != null && e.countField != e.prev.countField
-
-#  - console:    "Count is {{@event.countField}}"
+  - count:      count
+    period:     5s
+#  - distinct:
+#  - debounce:   2s
+  - script:     e.count *= 10
+  - console:    

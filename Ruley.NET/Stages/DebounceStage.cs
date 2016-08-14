@@ -4,6 +4,7 @@ namespace Ruley
 {
     public class DebounceStage : InlineStage
     {
+		[Primary]
         public Property<TimeSpan> Period { get; set; }
 
         private DateTime? _lastPublished;

@@ -10,7 +10,7 @@ namespace Ruley.Core.Filters
 
         public override Event Apply(Event msg)
         {
-            msg.Data[Destination] = DateTime.UtcNow;
+            msg[Destination] = DateTime.UtcNow;
             return msg;
         }
     }

@@ -20,7 +20,7 @@ namespace Ruley.Core.Inputs
             get { return _subject.AsObservable(); }
         }
 
-        public void OnNext(DynamicDictionary next)
+        public void OnNext(Event next)
         {
             //var ev = Context.GetNext();
             //ev.Data.Merge(next);
@@ -49,7 +49,7 @@ namespace Ruley.Core.Inputs
 
         public override void Start()
         {
-            RuleManager.MessageBus.Subscribe(Key, e => { OnNext(e.Data); });
+            RuleManager.MessageBus.Subscribe(Key, e => { OnNext(e); });
         }
     }
 }
