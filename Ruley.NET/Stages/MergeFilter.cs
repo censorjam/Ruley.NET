@@ -18,7 +18,7 @@ namespace Ruley.Core.Filters
                 if (str != null)
                 {
                     //todo cache this
-                    var g = new TemplatedPropertyGetter(str);
+                    var g = new TemplatedPropertyGetter(Ctx, str);
                     e[v.Key] = g.GetValue(str, e);
                 }
                 else

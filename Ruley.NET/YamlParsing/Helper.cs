@@ -14,17 +14,31 @@ namespace Ruley
 
 	public class YamlParser
 	{
+        private static Logger Logger = new Logger("YamlParser", false);
+
 		public static Pipeline Load(string file)
 		{
-			var s = File.ReadAllText(file);
-			var input = new StringReader(s);
+            Logger.Info("Loading file {0}", file);
+            var s = File.ReadAllText(file);
+            Logger.Info(s);
+            var input = new StringReader(s);
 
-			var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
+            Logger.Info("Deserializing...");
+            var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
 			var y = deserializer.Deserialize<YamlFile>(input);
-			var z = YamlParser.ToImmutable(y.Parameters[0]);
-			var p = YamlParser.FromDynamic(new Context(), y.Definition);
 
-			return p;
+            Logger.Debug("Parameters");
+
+            var parameters = new ImmutableDictionary<string, object>[y.Parameters.Length];
+            for(var i = 0; i < y.Parameters.Length; i++)
+            {
+                parameters[i] = YamlParser.ToImmutable(y.Parameters[i]);
+            }
+
+			var p = YamlParser.FromDynamic(new Context() { Parameters = new DynamicDictionary(parameters[0]) }, y.Definition);
+            Logger.Info("Loaded successfully");
+
+            return p;
 		}
 
 		public static Pipeline FromDynamic(Context ctx, dynamic def)
@@ -36,6 +50,7 @@ namespace Ruley
 			foreach (var f in def)
 			{
 				Stage stage = StageBuilder.Resolve(ctx, f);
+                Logger.Info("{0} loaded", stage.DisplayName);
 				chain.Stages.Add(stage);
 
 				if (prev != null)

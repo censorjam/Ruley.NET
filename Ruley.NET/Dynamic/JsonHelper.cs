@@ -3,28 +3,28 @@ using Newtonsoft.Json.Linq;
 
 namespace Ruley
 {
-    //public static class JsonHelper
-    //{
-    //    public static object Deserialize(string json)
-    //    {
-    //        return ToObject(JToken.Parse(json));
-    //    }
+    public static class JsonHelper
+    {
+        public static object Deserialize(string json)
+        {
+            return ToObject(JToken.Parse(json));
+        }
 
-    //    private static object ToObject(JToken token)
-    //    {
-    //        switch (token.Type)
-    //        {
-    //            case JTokenType.Object:
-    //                return new Event(token.Children<JProperty>()
-    //                    .ToDictionary(prop => prop.Name,
-    //                        prop => ToObject(prop.Value)));
+        private static object ToObject(JToken token)
+        {
+            switch (token.Type)
+            {
+                case JTokenType.Object:
+                    return new DynamicDictionary(token.Children<JProperty>()
+                        .ToDictionary(prop => prop.Name,
+                            prop => ToObject(prop.Value)));
 
-    //            case JTokenType.Array:
-    //                return token.Select(ToObject).ToList();
+                case JTokenType.Array:
+                    return token.Select(ToObject).ToList();
 
-    //            default:
-    //                return ((JValue)token).Value;
-    //        }
-    //    }
-    //}
+                default:
+                    return ((JValue)token).Value;
+            }
+        }
+    }
 }

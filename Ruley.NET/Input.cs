@@ -43,13 +43,13 @@ namespace Ruley.Core.Inputs
         }
     }
 
-    public class MessageBusInput : Input
-    {
-        public string Key { get; set; }
+    //public class MessageBusInput : Input
+    //{
+    //    public string Key { get; set; }
 
-        public override void Start()
-        {
-            RuleManager.MessageBus.Subscribe(Key, e => { OnNext(e); });
-        }
-    }
+    //    public override void Start()
+    //    {
+    //        RuleManager.MessageBus.Subscribe(Key, e => { OnNext(e); });
+    //    }
+    //}
 }

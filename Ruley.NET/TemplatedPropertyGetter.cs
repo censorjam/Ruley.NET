@@ -23,9 +23,11 @@ namespace Ruley.Core.Outputs
         private PropertyType _type;
         private string _fieldName;
         private Script<object> _script;
+        private Context _ctx;
 
-        public TemplatedPropertyGetter(object value)
+        public TemplatedPropertyGetter(Context ctx, object value)
         {
+            _ctx = ctx;
             SetPropertyType(value);
         }
 
@@ -69,7 +71,7 @@ namespace Ruley.Core.Outputs
             {
                 return value;
             }
-
+        
             if (_type == PropertyType.Field)
             {
                 return msg.GetValue(_fieldName);
@@ -78,7 +80,8 @@ namespace Ruley.Core.Outputs
             if (_type == PropertyType.Eval)
             {
                 var g = new Globals();
-                g.e = msg;
+                g.@event = msg;
+                g.@params = _ctx.Parameters;
                 object result = _script.RunAsync(g).Result.ReturnValue;
                 return result;
             }
@@ -95,6 +98,7 @@ namespace Ruley.Core.Outputs
 
     public class Globals
     {
-        public dynamic e;
+        public dynamic @event;
+        public dynamic @params;
     }
 }

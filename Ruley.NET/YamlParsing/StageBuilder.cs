@@ -21,18 +21,19 @@ namespace Ruley
             Register(typeof(DebounceStage));
             Register(typeof(MergeStage));
 			Register(typeof(DistinctStage));
-			Register(typeof(ScriptStage));
-		}
+            Register(typeof(ScriptStage));
+            Register(typeof(GraphiteStage));
+        }
 
 		public static void Register(Type filter)
         {
             KnownTypes.Add(filter);
         }
 
-        public static object CreateProperty(Type pType, string value)
+        public static object CreateProperty(Context ctx, Type pType, string value)
         {
-            var ctor = pType.GetConstructor(new[] { typeof(object) });
-            object instance = ctor.Invoke(new object[] { value });
+            var ctor = pType.GetConstructor(new[] { typeof(Context), typeof(object) });
+            object instance = ctor.Invoke(new object[] { ctx, value });
             return instance;
         }
 
@@ -78,10 +79,16 @@ namespace Ruley
                     }
                     prop.SetValue(filter, dd);
                 }
-                else
+                else if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Property<>))
                 {
                     var value = (string)kvp.Value;
-                    prop.SetValue(filter, CreateProperty(prop.PropertyType, value));
+                    prop.SetValue(filter, CreateProperty(context, prop.PropertyType, value));
+                }
+                //todo: need to find a better way of dealing with this (this is for the debug property)
+                else if (prop.PropertyType == typeof(Boolean))
+                {
+                    var value = Boolean.Parse((string)kvp.Value);
+                    prop.SetValue(filter, value);
                 }
             }
             return filter;

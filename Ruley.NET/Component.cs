@@ -7,10 +7,8 @@ namespace Ruley
     {
         public Component()
         {
-            Logger = new Logger();
+            Logger = new Logger(GetType().Name.Replace("Stage", ""), false);
         }
-
-
 
         private bool _enabled = true;
         public bool Enabled
@@ -21,7 +19,19 @@ namespace Ruley
 
 		public Context Ctx { get; set; }
 
-        public bool Debug { get; set; }
+        private bool _debug;
+        public bool Debug
+        {
+            get
+            {
+                return Logger.IsDebugEnabled;
+            }
+            set
+            {
+                _debug = value;
+                Logger = new Logger(GetType().Name.Replace("Stage", ""), _debug);
+            }
+        }
 
         public Logger Logger { get; set; }
 

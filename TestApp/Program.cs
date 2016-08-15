@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 using Ruley;
 
 namespace TestApp
 {
 
-	class Program
+    class Program
 	{
 		static void Main(string[] args)
 		{
-			var p = YamlParser.Load(@"rules/test.yaml");
+			var p = YamlParser.Load(@"rules/graphite.yaml");
 
-			p.Subscribe(x =>
-			{
-				Console.WriteLine("dfsdfdsf");
-			}, (Exception e) => Console.WriteLine(e));
+			//p.Subscribe(x =>
+			//{
+			//}, (Exception e) => Console.WriteLine(e));
 
 			p.Start();
 

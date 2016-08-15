@@ -15,7 +15,12 @@ namespace Ruley
 		{
 		}
 
-		public DynamicDictionary(IDictionary<string, object> source)
+        public DynamicDictionary(string json)
+        {
+            _data = (DynamicDictionary)JsonHelper.Deserialize(json);
+        }
+
+        public DynamicDictionary(IDictionary<string, object> source)
 		{
 			_data = source;
 		}
@@ -166,15 +171,49 @@ namespace Ruley
 			return _data.ContainsKey(property);
 		}
 
-		//public static Event Create(object o)
-		//{
-		//	var settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto };
-		//	return (Event)JsonHelper.Deserialize(JsonConvert.SerializeObject(o, settings));
-		//}
+        protected bool Equals(DynamicDictionary other)
+        {
+            if (Keys.Count != other.Keys.Count())
+                return false;
 
-		//public static Event Create(string json)
-		//{
-		//	return (Event)JsonHelper.Deserialize(json);
-		//}
-	}
+            foreach (var key in Keys)
+            {
+                object o;
+                var found = other.TryGetValue(key, out o);
+
+                if (!found)
+                    return false;
+
+                if (!this[key].Equals(o))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Event)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (_data != null ? _data.GetHashCode() : 0);
+        }
+
+        //public static Event Create(object o)
+        //{
+        //	var settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto };
+        //	return (Event)JsonHelper.Deserialize(JsonConvert.SerializeObject(o, settings));
+        //}
+
+        //public static Event Create(string json)
+        //{
+        //	return (Event)JsonHelper.Deserialize(json);
+        //}
+    }
 }

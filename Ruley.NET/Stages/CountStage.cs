@@ -12,6 +12,7 @@ namespace Ruley
 		[Primary]
         public Property<string> Field { get; set; }
 
+        private DateTime? _lastReset;
 		public Property<TimeSpan> Period { get; set; }
 
         public Property<bool> Where { get; set; }
@@ -19,26 +20,22 @@ namespace Ruley
 
         public override Event Apply(Event msg)
         {
+            if (_lastReset == null)
+                _lastReset = DateTime.UtcNow;
+
             if (Period != null)
             {
                 var now = DateTime.UtcNow;
 
-                if (Where == null || Where.Get(msg))
+                if (now - _lastReset < Period.Get(msg))
                 {
-                    _items.Add(DateTime.UtcNow);
+                    _count++;
                 }
                 else
                 {
-                    _items.Clear();
+                    _count = 1;
+                    _lastReset = now;
                 }
-
-                while (_items.Count > 0 && _items[0] <= (now - Period.Get(msg)))
-                {
-                    _items.RemoveAt(0);
-                }
-
-                msg.SetValue(Field.Get(msg), _items.Count);
-                return msg;
             }
             else
             {
@@ -50,10 +47,10 @@ namespace Ruley
                 {
                     _count = 0;
                 }
-
-                msg.SetValue(Field.Get(msg), _count);
-                return msg;
             }
+
+            msg.SetValue(Field.Get(msg), _count);
+            return msg;
         }
     }
 }

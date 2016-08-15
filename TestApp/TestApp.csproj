@@ -160,10 +160,13 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="rules\graphite.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="rules\ignore\graphite.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="rules\rukle.json">
+    <None Include="rules\ignore\rukle.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="rules\ignore\redis_latency.json">
@@ -172,7 +175,7 @@
     <None Include="rules\ignore\redis.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="rules\test.yaml">
+    <None Include="rules\ignore\test.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

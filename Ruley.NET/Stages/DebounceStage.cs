@@ -6,7 +6,6 @@ namespace Ruley
     {
 		[Primary]
         public Property<TimeSpan> Period { get; set; }
-
         private DateTime? _lastPublished;
 
         public override Event Apply(Event msg)

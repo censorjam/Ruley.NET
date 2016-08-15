@@ -1,15 +1,19 @@
 using Ruley.Core;
+using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace Ruley
 {
 	public class Context
 	{
-		public Event GetNextEvent()
-		{
-			return new Event();
-		}
+        public DynamicDictionary Parameters { get; set; }
 	}
+
+    public class Process : Pipeline
+    {
+        
+    }
 
 	public class Pipeline : Stage
     {
@@ -19,8 +23,6 @@ namespace Ruley
         {
             Stages = new List<Stage>();
         }
-
-		
 
         public override void OnNext(Event e)
         {
@@ -34,6 +36,8 @@ namespace Ruley
             {
                 stage.Start();
             }
+
+            Stages[Stages.Count - 1].Subscribe(PushNext);
         }
     }
 }

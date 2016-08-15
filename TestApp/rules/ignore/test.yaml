@@ -18,8 +18,8 @@ definition:
 
   - interval:   1s
   - count:      count
-    period:     5s
+    period:     20s
 #  - distinct:
-#  - debounce:   2s
+  - debounce:   2s
   - script:     e.count *= 10
-  - console:    
+  - console:    "{count}"

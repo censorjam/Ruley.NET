@@ -15,7 +15,7 @@ namespace Ruley.Core.Outputs
         public override void Do(Event msg)
         {
             if (_slackClient == null)
-                _slackClient = new SlackClient(WebHookUrl);
+                _slackClient = new SlackClient(WebHookUrl.Get(msg));
             
             var payload = new Payload()
             {

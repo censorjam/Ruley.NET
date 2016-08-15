@@ -1,5 +1,5 @@
-﻿using System.Reactive;
-using System.Reactive.Linq;
+﻿using System;
+using System.Reactive;
 
 namespace Ruley
 {
@@ -34,12 +34,12 @@ namespace Ruley
         {
             Then = new PassThroughStage();
             Else = new BlockingStage();
-        }
+       }
 
         public override void Start()
         {
-            Then.Subscribe(new AnonymousObserver<Event>(PushNext));
-            Else.Subscribe(new AnonymousObserver<Event>(PushNext));
+            Then.Subscribe(PushNext);
+            Else.Subscribe(PushNext);
 
             Then.Start();
             Else.Start();   

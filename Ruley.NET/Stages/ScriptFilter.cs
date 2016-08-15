@@ -28,7 +28,8 @@ namespace Ruley.Core.Filters
             }
 
             var g = new Globals();
-            g.e = msg;
+            g.@event = msg;
+            g.@params = Ctx.Parameters;
             _script.RunAsync(g).Wait();
 
             return msg;
