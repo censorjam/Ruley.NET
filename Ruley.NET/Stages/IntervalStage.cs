@@ -11,25 +11,22 @@ namespace Ruley
 
         public override void Start()
         {
-            //var p = Period.Get(null);
-            //Observable.Timer(TimeSpan.Zero, p).Subscribe(l =>
-            //{
-            //    Logger.Debug("Tick");
-
-            //    //while (true)
-            //    OnNext(new Event());
-            //});
-
-            Task.Run(() =>
+            var p = Period.Get(null);
+            Observable.Timer(TimeSpan.Zero, p).Subscribe(l =>
             {
-                while (true)
-                    OnNext(new Event());
-            });
-        }
+                Logger.Debug("Tick");
 
-        public override void OnNext(Event e)
-        {
-            PushNext(e);
+                //while (true)
+                PushNext(new Event());
+            });
+
+            //Task.Run(() =>
+            //{
+            //    for(var i = 0; i < 10000000; i++)
+            //        PushNext(new Event());
+
+            //    Logger.Info("Stopped");
+            //});
         }
     }
 }

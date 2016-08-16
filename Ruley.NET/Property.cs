@@ -22,6 +22,10 @@ namespace Ruley
         private TemplatedPropertyGetter _getter;
         private Context _ctx;
 
+        public Property()
+        {
+        }
+
         public Property(Context ctx)
         {
             _ctx = ctx;

@@ -7,7 +7,7 @@ namespace Ruley
 	{
         public Event()
         {
-            this["created"] = DateTime.UtcNow;
+         //   this["created"] = DateTime.UtcNow;
         }
 
         public Event Clone()

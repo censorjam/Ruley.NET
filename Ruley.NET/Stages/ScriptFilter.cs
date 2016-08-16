@@ -1,6 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
-using Newtonsoft.Json;
 using Ruley.Core.Outputs;
 
 namespace Ruley.Core.Filters

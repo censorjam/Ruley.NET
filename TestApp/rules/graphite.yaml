@@ -3,7 +3,7 @@ parameters:
 
   - query:      alias(spreadex.services.fins.live1.*.charting_appserver.application.process_cpu_usage-%, 'CPU %')
     threshold:  0
-    title:      Charting AppServer CPU
+    title:      Charting AppServer CPU High
     recipients: marc.jones@spreadex.com
 
   - query:      alias(spreadex.services.fins.live1.*.charting_appserver.application.process_cpu_usage-%, 'CPU %')
@@ -13,16 +13,23 @@ parameters:
 
 definition:
 
-  - interval:   10ms
-  - count:      all
+  - interval:   1s
+  - timestamp:  created
   - count:      count
     period:     1s   
+  - random:     random
+  - groupby:    => @event.appName
+    action:         
+      - console:        hello
+      - console:        world
+  - console:            test
+
+
 #  - where:      => @event.count > 0
 #  - distinct:   
-  - debounce:   5s
-
-  - console:
-
+#  - debounce:   250ms
+#  - console:    
+#
 #  - interval:   5s
 #  - graphite:   alias(spreadex.services.fins.live1.*.charting_appserver.application.process_cpu_usage-%, 'CPU %')
 #    url:        http://lapgrp001:8080

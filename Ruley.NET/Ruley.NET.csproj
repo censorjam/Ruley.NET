@@ -171,6 +171,7 @@
     <Compile Include="Dynamic\JsonHelper.cs" />
     <Compile Include="Filters\BlockFilter.cs" />
     <Compile Include="Pipeline.cs" />
+    <Compile Include="Stages\GroupByStage.cs" />
     <Compile Include="Stages\IfStage.cs" />
     <Compile Include="Filters\ChainFilter.cs" />
     <Compile Include="Filters\PrimaryAttribute.cs" />

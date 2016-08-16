@@ -20,12 +20,15 @@ namespace Ruley
             Register(typeof(PrevStage));
             Register(typeof(DebounceStage));
             Register(typeof(MergeStage));
-			Register(typeof(DistinctStage));
+            Register(typeof(DistinctStage));
             Register(typeof(ScriptStage));
             Register(typeof(GraphiteStage));
+            Register(typeof(RandomStage));
+            Register(typeof(TimestampStage));
+            Register(typeof(GroupByStage));
         }
 
-		public static void Register(Type filter)
+        public static void Register(Type filter)
         {
             KnownTypes.Add(filter);
         }
@@ -50,11 +53,11 @@ namespace Ruley
                 {
                     var type = KnownTypes.First(t => t.Name.Replace("Stage", "").ToLower() == key.ToLower());
                     filter = (Stage)Activator.CreateInstance(type);
-	                filter.Ctx = context;
-					prop = type.GetProperties().FirstOrDefault(p => p.GetCustomAttributes(typeof(PrimaryAttribute), true).Length > 0);
+                    filter.Ctx = context;
+                    prop = type.GetProperties().FirstOrDefault(p => p.GetCustomAttributes(typeof(PrimaryAttribute), true).Length > 0);
 
-	                if (prop == null)
-		                continue;
+                    if (prop == null)
+                        continue;
                 }
                 else
                 {
