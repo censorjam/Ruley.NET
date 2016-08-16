@@ -14,10 +14,12 @@ namespace Ruley.Core.Filters
 
     public class MapStage : InlineStage
     {
-        [JsonProperty(Required = Required.Always)]
+        [Primary]
         public Property<string> Value { get; set; }
+		public Property<string> To { get; set; }
+		public DynamicDictionary With { get; set; }
 
-        public Property<bool> IgnoreCase { get; set; }
+		public Property<bool> IgnoreCase { get; set; }
         public Property<bool> RegexMatch { get; set; }
 
         private Event _default { get; set; }
@@ -31,31 +33,16 @@ namespace Ruley.Core.Filters
 
         public override Event Apply(Event msg)
         {
-            foreach (var mapping in Map)
-            {
-                //var s = mapping.Key == null ? "null" : mapping.Key.ToString();
-                //var value = Value.GetValue(msg);
-                //var valueString = value == null ? "null" :value.ToString();
+	        var value = Value.Get(msg);
+	        object o;
+	        With.TryGetValue(value, out o);
 
-                //if (valueString == s)
-                //{
-                //    msg.Data.Merge(mapping.Value);
-                //    return msg;
-                //}
-            }
+	        if (o == null)
+	        {
+				throw new Exception(String.Format("Value not present in mapping '{0}'", value));
+	        }
 
-            //if (_default == null)
-            //{
-            //    //todo needs optimising?
-            //    var d = Map.FirstOrDefault(i => (i.Key is string && (string) i.Key == "$default"));
-            //    if (d != null) 
-            //        _default = d.Value;
-            //}
-
-            //if (_default == null)
-            //    return msg;
-
-            //msg.Data.Merge(_default);
+	        msg[To.Get(msg)] = With[value];
             return msg;
         }
     }

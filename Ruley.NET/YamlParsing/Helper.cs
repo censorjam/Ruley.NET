@@ -16,27 +16,33 @@ namespace Ruley
 	{
         private static Logger Logger = new Logger("YamlParser", false);
 
-		public static Pipeline Load(string file)
+		public static Pipeline LoadFromFile(string file)
 		{
-            Logger.Info("Loading file {0}", file);
-            var s = File.ReadAllText(file);
-            Logger.Info(s);
-            var input = new StringReader(s);
+			Logger.Info("Loading file {0}", file);
+			var s = File.ReadAllText(file);
+			return Load(s);
+		}
 
-            Logger.Info("Deserializing...");
+		public static Pipeline Load(string s)
+		{
+			Logger.Info(s);
+			var input = new StringReader(s);
+
+			Logger.Info("Deserializing...");
             var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
 			var y = deserializer.Deserialize<YamlFile>(input);
 
-            Logger.Debug("Parameters");
-
+            Logger.Debug("Reading parameters");
             var parameters = new ImmutableDictionary<string, object>[y.Parameters.Length];
             for(var i = 0; i < y.Parameters.Length; i++)
             {
                 parameters[i] = YamlParser.ToImmutable(y.Parameters[i]);
             }
 
-			var p = YamlParser.FromDynamic(new Context() { Parameters = new DynamicDictionary(parameters[0]) }, y.Definition);
-            Logger.Info("Loaded successfully");
+			Logger.Debug("Reading pipeline");
+			var p = YamlParser.FromDynamic(new Context(new DynamicDictionary(parameters[0])), y.Definition);
+
+			Logger.Info("Loaded successfully");
 
             return p;
 		}
@@ -63,6 +69,21 @@ namespace Ruley
 			return chain;
 		}
 
+
+		public static object TryAsNumber(string input)
+		{
+			double d;
+			if (double.TryParse(input, out d))
+			{
+				return d;
+			}
+			else
+			{
+				return input;
+			}
+		}
+
+
 		public static ImmutableDictionary<string, object> ToImmutable(IDictionary<object, object> source)
 		{
 			var o = ImmutableDictionary<string, object>.Empty;
@@ -82,7 +103,7 @@ namespace Ruley
 					}
 					else
 					{
-						o = o.SetItem((string)o1.Key, o1.Value);
+						o = o.SetItem((string)o1.Key, o1.Value);  
 					}
 				}
 			}

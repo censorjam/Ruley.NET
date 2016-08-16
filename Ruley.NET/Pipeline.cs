@@ -7,7 +7,12 @@ namespace Ruley
 {
 	public class Context
 	{
-        public DynamicDictionary Parameters { get; set; }
+        public DynamicDictionary Parameters { get; private set; }
+
+		public Context(DynamicDictionary parameters)
+		{
+			Parameters = parameters;
+		}
 	}
 
     public class Process : Pipeline

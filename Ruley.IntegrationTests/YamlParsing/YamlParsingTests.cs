@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Reflection;
 using System.IO;
-using System.Dynamic;
-using Microsoft.CSharp;
 
 namespace Ruley.Tests
 {
@@ -32,13 +30,12 @@ namespace Ruley.Tests
 
 			Event last = null;
 			x.Subscribe(s => { last = s; });
-			x.Start();
 
 			dynamic next = new Event();
-			next.a = "abc";
+			next["a"] = "abc";
 			x.OnNext(next);
 
-			Assert.AreEqual("XYZ", last["newfield"]);
+			Assert.AreEqual("xyz", last["newfield"]);
 		}
     }
 }

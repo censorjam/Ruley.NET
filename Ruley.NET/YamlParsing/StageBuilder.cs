@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Ruley.Core;
 using Ruley.Core.Filters;
+using YamlDotNet.Core;
 
 namespace Ruley
 {
@@ -10,25 +12,26 @@ namespace Ruley
     {
         private static List<Type> KnownTypes = new List<Type>();
 
-        static StageBuilder()
-        {
-            Register(typeof(ConsoleStage));
-            Register(typeof(IntervalStage));
-            Register(typeof(CountStage));
-            Register(typeof(IfStage));
-            Register(typeof(WhereStage));
-            Register(typeof(PrevStage));
-            Register(typeof(DebounceStage));
-            Register(typeof(MergeStage));
-            Register(typeof(DistinctStage));
-            Register(typeof(ScriptStage));
-            Register(typeof(GraphiteStage));
-            Register(typeof(RandomStage));
-            Register(typeof(TimestampStage));
-            Register(typeof(GroupByStage));
-        }
+	    static StageBuilder()
+	    {
+		    Register(typeof(ConsoleStage));
+		    Register(typeof(IntervalStage));
+		    Register(typeof(CountStage));
+		    Register(typeof(IfStage));
+		    Register(typeof(WhereStage));
+		    Register(typeof(PrevStage));
+		    Register(typeof(DebounceStage));
+		    Register(typeof(MergeStage));
+		    Register(typeof(DistinctStage));
+		    Register(typeof(ScriptStage));
+		    Register(typeof(GraphiteStage));
+		    Register(typeof(RandomStage));
+		    Register(typeof(TimestampStage));
+		    Register(typeof(GroupByStage));
+		    Register(typeof(MapStage));
+	    }
 
-        public static void Register(Type filter)
+	    public static void Register(Type filter)
         {
             KnownTypes.Add(filter);
         }
@@ -45,8 +48,9 @@ namespace Ruley
             Stage filter = null;
 
             foreach (var kvp in d)
-            {
+			{ 
                 var key = (string)kvp.Key;
+			 
                 PropertyInfo prop;
 
                 if (filter == null)
@@ -64,7 +68,10 @@ namespace Ruley
                     prop = filter.GetType().GetProperties().FirstOrDefault(p => p.Name.ToLower() == key);
                 }
 
-                if (prop.PropertyType == typeof(Stage))
+	            if (prop == null)
+					throw new Exception(string.Format("Could not find property '{0}' on type {1}", key, filter.DisplayName));
+
+	            if (prop.PropertyType == typeof(Stage))
                 {
                     var value = YamlParser.FromDynamic(context, kvp.Value);
                     prop.SetValue(filter, value);
@@ -72,7 +79,7 @@ namespace Ruley
                 else if (prop.PropertyType == typeof(Event))
                 {
                     var dd = new Event();
-
+					
                     var o = kvp.Value as List<object>;
                     foreach (Dictionary<object, object> o1 in o)
                     {
@@ -82,7 +89,21 @@ namespace Ruley
                     }
                     prop.SetValue(filter, dd);
                 }
-                else if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Property<>))
+				else if (prop.PropertyType == typeof(DynamicDictionary))
+				{
+					var dd = new DynamicDictionary();
+
+					var o = kvp.Value as List<object>;
+					foreach (Dictionary<object, object> o1 in o)
+					{
+						var k = o1.Keys.First() as string;
+						var v = o1.Values.First();
+						//need to handle complex objects here
+						dd[k] = YamlParser.TryAsNumber(v as string);
+					}
+					prop.SetValue(filter, dd);
+				}
+				else if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Property<>))
                 {
                     var value = (string)kvp.Value;
                     prop.SetValue(filter, CreateProperty(context, prop.PropertyType, value));

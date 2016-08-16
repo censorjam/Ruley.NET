@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace Ruley
 {
 	public class DynamicDictionary : DynamicObject, IDictionary<string, object>
 	{
-		protected readonly IDictionary<string, object> _data = new Dictionary<string, object>();
+		protected readonly IDictionary<string, object> _data;
 
 		public DynamicDictionary()
 		{
+			_data = new Dictionary<string, object>(); 
 		}
 
         public DynamicDictionary(string json)

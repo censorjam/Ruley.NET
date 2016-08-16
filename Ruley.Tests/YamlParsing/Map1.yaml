@@ -1,0 +1,15 @@
+﻿--- 
+parameters:
+  - a:    abc
+    
+definition:
+
+ - map:        => @event.a
+   to:         newfield  
+   with:
+    - a:        A
+    - abc:      XYZ
+    - ab:       C1
+    - sdff:     D1
+#   default:     S1
+
