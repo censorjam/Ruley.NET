@@ -13,6 +13,11 @@ namespace Ruley
 		{
 			Parameters = parameters;
 		}
+
+		public Event GetNext()
+		{
+			return new Event(Parameters);
+		}
 	}
 
     public class Process : Pipeline

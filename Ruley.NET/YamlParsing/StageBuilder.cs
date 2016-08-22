@@ -57,7 +57,7 @@ namespace Ruley
                 {
                     var type = KnownTypes.First(t => t.Name.Replace("Stage", "").ToLower() == key.ToLower());
                     filter = (Stage)Activator.CreateInstance(type);
-                    filter.Ctx = context;
+                    filter.Context = context;
                     prop = type.GetProperties().FirstOrDefault(p => p.GetCustomAttributes(typeof(PrimaryAttribute), true).Length > 0);
 
                     if (prop == null)
@@ -76,19 +76,19 @@ namespace Ruley
                     var value = YamlParser.FromDynamic(context, kvp.Value);
                     prop.SetValue(filter, value);
                 }
-                else if (prop.PropertyType == typeof(Event))
-                {
-                    var dd = new Event();
+                //else if (prop.PropertyType == typeof(Event))
+                //{
+                //    var dd = Context.GetNext();
 					
-                    var o = kvp.Value as List<object>;
-                    foreach (Dictionary<object, object> o1 in o)
-                    {
-                        var k = o1.Keys.First() as string;
-                        var v = o1.Values.First();
-                        dd[k] = v;
-                    }
-                    prop.SetValue(filter, dd);
-                }
+                //    var o = kvp.Value as List<object>;
+                //    foreach (Dictionary<object, object> o1 in o)
+                //    {
+                //        var k = o1.Keys.First() as string;
+                //        var v = o1.Values.First();
+                //        dd[k] = v;
+                //    }
+                //    prop.SetValue(filter, dd);
+                //}
 				else if (prop.PropertyType == typeof(DynamicDictionary))
 				{
 					var dd = new DynamicDictionary();

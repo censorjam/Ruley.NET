@@ -50,7 +50,7 @@ namespace Ruley
 		public static Pipeline FromDynamic(Context ctx, dynamic def)
 		{
 			var chain = new Pipeline();
-			chain.Ctx = ctx;
+			chain.Context = ctx;
 
 			Stage prev = null;
 			foreach (var f in def)

@@ -33,7 +33,7 @@ namespace Ruley.Core.Filters
             if (count == 0)
             {
                 //todo massive bug creating an event here, needs to use context!
-                msgs = new List<Event> { new Event() };
+                msgs = new List<Event> { Context.GetNext() };
             }
 
             msgs[0].SetValue(CountField ?? "count", count);

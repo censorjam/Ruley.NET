@@ -17,9 +17,11 @@ namespace Ruley.Core
 			//Generator generator = compiler.Compile(template);
 			//string result = generator.Render(o);
 
+			return NString.StringTemplate.Format(template, new TGlobals() { e = obj});
+
 			//return template;
 			////return result;
-			return Smart.Format(template, obj);
+//			return Smart.Format(template, obj);
 
 			//var prev = ' ';
    //         int start = 0;

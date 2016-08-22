@@ -8,11 +8,7 @@ namespace TestApp
 	{
 		static void Main(string[] args)
 		{
-			var p = YamlParser.Load(@"rules/graphite.yaml");
-
-			//p.Subscribe(x =>
-			//{
-			//}, (Exception e) => Console.WriteLine(e));
+			var p = YamlParser.LoadFromFile(@"rules/graphite.yaml");
 
 			p.Start();
 

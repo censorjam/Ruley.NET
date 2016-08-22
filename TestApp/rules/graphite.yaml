@@ -14,27 +14,27 @@ parameters:
 definition:
 
   - interval:   1s
-
   - timestamp:  created
-  
   - count:      count
     period:     1s   
-  
   - random:     random
-  
-  - groupby:    => @event.appName
-    action:     
-      - console:        hello
-      - console:        world
+  - console:    hello {e.created}
 
-  - map:        => @event.appName
-    to:         newfield  
-    with:
-      - a:        F1
-      - xyz:      F2 
-      - yteyrt:   F1
-      - sdff:     F2
-    default:      S1
+#  - groupby:    => @event.appName
+#    action:     
+#      - console:        hello
+#      - console:        world
+#  - map:        => @event.appName
+#    to:         newfield  
+#    with:
+#      - a:        F1
+#      - xyz:      F2 
+#      - yteyrt:   F1
+#      - sdff:     F2
+##    default:      S1
+
+
+
 
 #  - if:         => @event.newfield.StartsWith("F")
 #    then:       

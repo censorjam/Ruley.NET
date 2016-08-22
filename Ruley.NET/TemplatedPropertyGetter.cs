@@ -101,4 +101,11 @@ namespace Ruley.Core.Outputs
         public dynamic @event;
         public dynamic @params;
     }
+
+
+	public class TGlobals
+	{
+		public Event e;
+		public dynamic @params;
+	}
 }

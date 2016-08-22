@@ -17,7 +17,7 @@ namespace Ruley
                 Logger.Debug("Tick");
 
                 //while (true)
-                PushNext(new Event());
+                PushNext(Context.GetNext());
             });
 
             //Task.Run(() =>

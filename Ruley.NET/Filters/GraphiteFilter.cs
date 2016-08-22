@@ -50,7 +50,7 @@ namespace Ruley
                             if ((long)o[1] > _lastSent[item.target] && o[0] != null)
                             {
                                 _lastSent[item.target] = (long)o[1];
-                                dynamic e = new Event();
+                                dynamic e = Context.GetNext();
                                 e.value = o[0];
                                 e.key = item.target;
                                 e.timestamp = new DateTime(1970, 1, 1).AddSeconds((long)o[1]).ToLocalTime();

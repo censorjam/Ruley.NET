@@ -17,7 +17,7 @@ namespace Ruley
             set { _enabled = value; }
         }
 
-		public Context Ctx { get; set; }
+		public Context Context { get; set; }
 
         private bool _debug;
         public bool Debug

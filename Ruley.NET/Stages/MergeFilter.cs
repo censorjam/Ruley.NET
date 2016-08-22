@@ -8,7 +8,7 @@ namespace Ruley.Core.Filters
 		//needs to filter out $ fields!
         [JsonRequired]
         [Primary]
-        public Event Value { get; set; }
+        public DynamicDictionary Value { get; set; }
         
         public override Event Apply(Event e)
         {
@@ -18,7 +18,7 @@ namespace Ruley.Core.Filters
                 if (str != null)
                 {
                     //todo cache this
-                    var g = new TemplatedPropertyGetter(Ctx, str);
+                    var g = new TemplatedPropertyGetter(Context, str);
                     e[v.Key] = g.GetValue(str, e);
                 }
                 else
