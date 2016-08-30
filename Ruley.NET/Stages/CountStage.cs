@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace Ruley
+namespace Ruley.NET
 {
     public class CountStage : InlineStage
     {

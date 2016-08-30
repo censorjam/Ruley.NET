@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
-using Ruley.Core.Outputs;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public abstract class Filter : Component
     {

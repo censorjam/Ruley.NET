@@ -2,7 +2,7 @@ using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public abstract class InlineFilter : Filter
     {

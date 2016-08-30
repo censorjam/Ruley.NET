@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public class SkipFilter : InlineFilter 
     {

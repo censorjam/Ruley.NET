@@ -1,8 +1,7 @@
 using System;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 
-namespace Ruley
+namespace Ruley.NET
 {
     public class IntervalStage : Stage
     {

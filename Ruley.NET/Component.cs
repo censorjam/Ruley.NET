@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Ruley
+namespace Ruley.NET
 {
     public abstract class Component : IDisposable
     {

@@ -2,9 +2,8 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Web;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public class HttpFilter : InlineFilter
     {

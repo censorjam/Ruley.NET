@@ -1,15 +1,8 @@
 using System;
-using Microsoft.CodeAnalysis.CSharp.Scripting;
-using Microsoft.CodeAnalysis.Scripting;
-using System.Collections.Concurrent;
+using System.Net;
 
-namespace Ruley.Core.Outputs
+namespace Ruley.NET
 {
-    public static class RoselynCache
-    {
-        public static ConcurrentDictionary<string, Script<object>> Cache = new ConcurrentDictionary<string, Script<object>>();
-    }
-
     public class TemplatedPropertyGetter
     {
         public enum PropertyType
@@ -22,7 +15,7 @@ namespace Ruley.Core.Outputs
 
         private PropertyType _type;
         private string _fieldName;
-        private Script<object> _script;
+        private Func<dynamic, dynamic, object> _script;
         private Context _ctx;
 
         public TemplatedPropertyGetter(Context ctx, object value)
@@ -45,26 +38,17 @@ namespace Ruley.Core.Outputs
                 _type = PropertyType.Eval;
                 _fieldName = str.Substring(2, str.Length - 2);
                 _fieldName = _fieldName.Replace("'", "\"");
-
-                var scriptOptions = ScriptOptions.Default
-                    .WithImports("System")
-                    .WithReferences("Microsoft.CSharp");
-
-                _script = RoselynCache.Cache.GetOrAdd(_fieldName, (k) =>
-                {
-                    return CSharpScript.Create<object>(_fieldName, globalsType: typeof(Globals), options: scriptOptions);
-                });
+                _script = ScriptEngine.Create(_fieldName);
 
                 return;
             }
 
             _type = PropertyType.Template;
-            _fieldName = str;//.Substring(5, str.Length - 6);
+            _templater.Compile(str);
             return;
-
-            _type = PropertyType.Value;
         }
 
+        private Templater _templater = new Templater();
         public object GetValue(object value, Event msg)
         {
             if (_type == PropertyType.Value)
@@ -79,16 +63,13 @@ namespace Ruley.Core.Outputs
 
             if (_type == PropertyType.Eval)
             {
-                var g = new Globals();
-                g.@event = msg;
-                g.@params = _ctx.Parameters;
-                object result = _script.RunAsync(g).Result.ReturnValue;
+                object result = _script(msg, _ctx.Parameters);
                 return result;
             }
 
             if (_type == PropertyType.Template)
             {
-                var result = Templater.ApplyTemplate(_fieldName, msg);
+                var result = _templater.Apply(new TemplateParameters() { @event= msg, @params = _ctx.Parameters });
                 return result;
             }
 
@@ -96,16 +77,4 @@ namespace Ruley.Core.Outputs
         }
     }
 
-    public class Globals
-    {
-        public dynamic @event;
-        public dynamic @params;
-    }
-
-
-	public class TGlobals
-	{
-		public Event e;
-		public dynamic @params;
-	}
 }

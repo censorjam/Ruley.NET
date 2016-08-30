@@ -1,7 +1,4 @@
-﻿using System.Dynamic;
-using Newtonsoft.Json;
-
-namespace Ruley
+﻿namespace Ruley.NET
 {
     public class PrevStage : InlineStage
     {

@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Ruley.Core.Outputs;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public class MergeStage : InlineStage
     {

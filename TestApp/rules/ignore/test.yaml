@@ -16,10 +16,8 @@ parameters:
     
 definition:
 
-  - interval:   1s
-  - count:      count
-    period:     20s
-#  - distinct:
-  - debounce:   2s
-  - script:     e.count *= 10
-  - console:    "{count}"
+  - interval:       1s
+  - perfcounter:    "% Processor Time"
+    category:        "Processor"
+    instance:       _Total
+  - console:        

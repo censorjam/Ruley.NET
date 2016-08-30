@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public class StageWrapper
     {
@@ -17,7 +17,7 @@ namespace Ruley.Core.Filters
 
         private ConcurrentDictionary<string, Stage> _groups = new ConcurrentDictionary<string, Stage>();
         
-        public override void OnNext(Event msg)
+        protected override void Process(Event msg)
         {
             var key = Key.Get(msg).ToString();
 

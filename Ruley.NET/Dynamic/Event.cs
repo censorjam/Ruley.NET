@@ -1,6 +1,4 @@
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 
 namespace Ruley
 {
@@ -20,5 +18,11 @@ namespace Ruley
 		{
 			return (Event)JsonConvert.DeserializeObject<Event>(JsonConvert.SerializeObject(this));
 		}
+
+        public Event Set(string key, object value)
+        {
+            this[key] = value;
+            return this;
+        }
 	}
 }

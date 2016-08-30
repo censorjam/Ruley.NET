@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Ruley.Core.Outputs
+namespace Ruley.NET
 {
     public class Payload
     {

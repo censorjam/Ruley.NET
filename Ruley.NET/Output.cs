@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-
-namespace Ruley.Core.Outputs
+﻿namespace Ruley.NET
 {
     public abstract class Output : Component
     {

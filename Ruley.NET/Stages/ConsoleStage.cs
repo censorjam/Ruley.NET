@@ -1,10 +1,17 @@
-using System;
 using Newtonsoft.Json;
+using Ruley.NET.External;
 
-namespace Ruley
+namespace Ruley.NET
 {
     public class ConsoleStage : InlineStage
     {
+        private readonly IConsoleOutput _console;
+
+        public ConsoleStage(IConsoleOutput console)
+        {
+            _console = console;
+        }
+
         [Primary]
         public Property<string> Message { get; set; }
 
@@ -18,41 +25,12 @@ namespace Ruley
 
             if (msg == null)
             {
-                Console.WriteLine(JsonConvert.SerializeObject(x, Formatting.Indented));
+                _console.WriteLine(JsonConvert.SerializeObject(x, Formatting.Indented));
             }
             else
             {
-                Console.WriteLine(Message.Get(x));
+                _console.WriteLine(Message.Get(x));
             }
-            return x;
-        }
-    }
-
-    public class RandomStage : InlineStage
-    {
-        [Primary]
-        public Property<string> Field { get; set; }
-
-        private Random _r = new Random();
-
-        public override Event Apply(Event x)
-        {
-            x[Field.Get(x)] = _r.Next();
-            return x;
-        }
-    }
-
-    public class TimestampStage : InlineStage
-    {
-        [Primary]
-        public Property<string> Field { get; set; }
-
-        public override Event Apply(Event x)
-        {
-            x[Field.Get(x)] = DateTime.UtcNow;
-
-            x["appName"] = "fred";
-
             return x;
         }
     }

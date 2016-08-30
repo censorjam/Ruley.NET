@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Reactive;
 
-namespace Ruley
+namespace Ruley.NET
 {
     public class PassThroughStage : InlineStage
     {
@@ -34,18 +33,18 @@ namespace Ruley
         {
             Then = new PassThroughStage();
             Else = new BlockingStage();
-       }
+        }
 
-        public override void Start()
+        public override void OnFirst(Event e)
         {
             Then.Subscribe(PushNext);
             Else.Subscribe(PushNext);
 
             Then.Start();
-            Else.Start();   
+            Else.Start();
         }
 
-        public override void OnNext(Event x)
+        protected override void Process(Event x)
         {
             var match = Value.Get(x);
             if (match)

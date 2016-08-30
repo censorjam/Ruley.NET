@@ -1,11 +1,9 @@
-using Ruley.Core;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 
-namespace Ruley
+namespace Ruley.NET
 {
-	public class Context
+    public class Context
 	{
         public DynamicDictionary Parameters { get; private set; }
 
@@ -16,7 +14,7 @@ namespace Ruley
 
 		public Event GetNext()
 		{
-			return new Event(Parameters);
+			return new Event();
 		}
 	}
 
@@ -34,7 +32,7 @@ namespace Ruley
             Stages = new List<Stage>();
         }
 
-        public override void OnNext(Event e)
+        protected override void Process(Event e)
         {
             Stages[0].OnNext(e);
         }

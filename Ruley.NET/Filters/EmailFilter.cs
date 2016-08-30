@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Mail;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public class EmailFilter : InlineFilter
     {

@@ -1,4 +1,11 @@
 ﻿
+V1.0
+Create windows service
+Hook up logging
+
+
+
+
 logger liblog?
 input @parameters. rather than adding to @event
 optimise the script compile

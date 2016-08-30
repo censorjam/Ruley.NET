@@ -4,9 +4,8 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Ruley.Core.Outputs;
 
-namespace Ruley.Core.Inputs
+namespace Ruley.NET
 {
     public abstract class Input : Component
     {

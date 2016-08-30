@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Dynamic;
 using Newtonsoft.Json;
 
-namespace Ruley.Core.Outputs
+namespace Ruley.NET
 {
     public class ConsoleOutput : Output
     {

@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace Ruley
+namespace Ruley.NET
 {
 	public class YamlFile
 	{

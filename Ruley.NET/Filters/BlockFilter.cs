@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-
-namespace Ruley.Core.Filters
+﻿namespace Ruley.NET
 {
     public class BlockFilter : InlineFilter
     {

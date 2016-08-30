@@ -1,7 +1,6 @@
 ﻿using System;
-using Ruley.Core.Outputs;
 
-namespace Ruley
+namespace Ruley.NET
 {
     public class Property<T>
     {
@@ -118,21 +117,5 @@ namespace Ruley
         {
             return (T)_getter.GetValue(Value, @event);
         }
-
-        //public object GetValue(Event @event)
-        //{
-        //    if (@event == null)
-        //        throw new ArgumentNullException("event");
-
-        //    return _getter.GetValue(Value, @event.Data);
-        //}
-
-        //public T GetValue(Event @event)
-        //{
-        //    if (@event == null)
-        //        throw new ArgumentNullException("event");
-
-        //    return (T)_getter.GetValue(Value, @event.Data);
-        //}
     }
 }

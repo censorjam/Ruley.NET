@@ -1,8 +1,5 @@
-﻿using Ruley.Core.Filters;
-using System;
-using Ruley.Core;
+﻿using System;
 using Graphite;
-using Ruley.NET.Logging;
 
 namespace Ruley.NET.Filters
 {

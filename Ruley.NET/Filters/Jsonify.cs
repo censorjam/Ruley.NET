@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public class JsonifyFilter : InlineFilter
     {

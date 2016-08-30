@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace Ruley
+﻿namespace Ruley.NET
 {
-	public abstract class InlineStage : Stage
+    public abstract class InlineStage : Stage
 	{
-		public override void OnNext(Event e)
+		protected override void Process(Event e)
 		{
-			var nx = Apply(e);
+		    var nx = Apply(e);
 
 			if (nx != null)
 				PushNext(nx);

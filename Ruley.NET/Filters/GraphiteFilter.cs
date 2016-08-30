@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Net.Http;
 
-namespace Ruley
+namespace Ruley.NET
 {
     public class GraphiteStage : Stage
     {
@@ -16,7 +16,7 @@ namespace Ruley
 
         private Dictionary<string, long> _lastSent = new Dictionary<string, long>();
 
-        public override void OnNext(Event msg)
+        protected override void Process(Event msg)
         {
             using (var client = new HttpClient())
             {

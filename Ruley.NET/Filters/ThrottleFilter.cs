@@ -4,7 +4,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Newtonsoft.Json;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public class ThrottleFilter : Filter
     {

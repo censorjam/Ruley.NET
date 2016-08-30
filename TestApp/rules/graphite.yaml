@@ -13,13 +13,21 @@ parameters:
 
 definition:
 
-  - interval:   1s
-  - timestamp:  created
-  - count:      count
-    period:     1s   
-  - random:     random
-  - console:    hello {e.created}
+  - interval:       1s
+  - perfcounter:    "% Processor Time"
+    category:        "Processor"
+    instance:       _Total
+  - udp:            
+  - console:        
 
+#
+#  - interval:   1s
+#  - timestamp:  created
+#  - count:      count
+#    period:     1s   
+#  - random:     random
+#  - console:    hello {e.created}
+#
 #  - groupby:    => @event.appName
 #    action:     
 #      - console:        hello

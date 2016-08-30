@@ -1,0 +1,17 @@
+﻿--- 
+parameters:
+  - a:    10.987654321
+    b:    world
+    
+definition:
+  - timestamp:      timestamp
+  - script:         "@event.newfield = month(@event.timestamp)"
+  - template:       "{@event.inputField}-{@params.b}-{@params.a:D3}"
+    destination:    text
+  - if:             => @event.newfield > 0
+    then:
+      - count:      count
+    else:
+      - random:     randomfield
+  - distinct:
+  - console:        

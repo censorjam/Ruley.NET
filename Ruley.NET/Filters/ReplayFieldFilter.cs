@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public class ReplayFieldFilter : InlineFilter
     {

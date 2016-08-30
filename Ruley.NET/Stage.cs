@@ -1,11 +1,12 @@
-using Ruley.NET.Logging;
 using System;
 using System.Reactive.Subjects;
 
-namespace Ruley
+namespace Ruley.NET
 {
     public abstract class Stage : Component, IObservable<Event>, IObserver<Event>
     {
+        private bool _hadFirst;
+
         public Stage()
         {
 
@@ -29,10 +30,18 @@ namespace Ruley
         {
         }
 
-        public void PushNext(Event e)
+        public virtual void OnFirst(Event e)
+        {
+        }
+
+        protected void PushNext(Event e)
         {
             Logger.Debug("Pushing next");
             _subject.OnNext(e);
+        }
+
+        protected virtual void Process(Event e)
+        {
         }
 
         public IDisposable Subscribe(IObserver<Event> observer)
@@ -41,9 +50,14 @@ namespace Ruley
             return _subject.Subscribe(observer);
         }
 
-        public virtual void OnNext(Event value)
+        public void OnNext(Event e)
         {
-            PushNext(value);
+            if (!_hadFirst)
+            {
+                OnFirst(e);
+                _hadFirst = true;
+            }
+            Process(e);
         }
 
         public void OnError(Exception error)

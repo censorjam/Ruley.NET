@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ruley
+namespace Ruley.NET
 {
     public class DebounceStage : InlineStage
     {

@@ -1,36 +1,24 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
+﻿using System;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
-using Ruley.Core.Outputs;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public class ScriptStage : InlineStage
     {
         [Primary]
         public Property<string> Value { get; set; }
-        private Script<object> _script = null;
- 
-        private object _sync = new object();
+        private Func<dynamic, dynamic, object> _script = null;
+
+        public override void OnFirst(Event e)
+        {
+            var s = Value.Get(e);
+            _script = ScriptEngine.Create(s);
+        }
 
         public override Event Apply(Event msg)
         {
-            lock (_sync)
-            {
-                if (_script == null)
-                {
-                    var scriptOptions = ScriptOptions.Default
-                        .WithImports("System")
-                        .WithReferences("Microsoft.CSharp");
-
-                    _script = CSharpScript.Create<object>(Value.Get(msg), globalsType: typeof(Globals), options: scriptOptions);
-                }
-            }
-
-            var g = new Globals();
-            g.@event = msg;
-            g.@params = Context.Parameters;
-            _script.RunAsync(g).Wait();
-
+            _script(msg, Context.Parameters);
             return msg;
         }
     }

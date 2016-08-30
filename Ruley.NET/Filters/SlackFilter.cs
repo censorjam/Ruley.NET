@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Ruley.Core.Outputs;
 
-namespace Ruley.Core.Filters
+namespace Ruley.NET
 {
     public class SlackFilter : InlineFilter
     {

@@ -1,4 +1,4 @@
-﻿namespace Ruley.Core.Filters
+﻿namespace Ruley.NET
 {
     public class FilterSerializationWrapper
     {
