@@ -27,6 +27,7 @@ namespace Ruley
             IoC.RegisterStage<MapStage>();
             IoC.RegisterStage<PerfCounterStage>();
             IoC.RegisterStage<TemplateStage>();
+            IoC.RegisterStage<UdpOutStage>();
         }
 
         public static object CreateProperty(Context ctx, Type pType, string value)
@@ -86,8 +87,15 @@ namespace Ruley
 
                 else if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Property<>))
                 {
-                    var value = (string)kvp.Value;
-                    prop.SetValue(filter, CreateProperty(context, prop.PropertyType, value));
+                    if (kvp.Value == null)
+                    {
+                        prop.SetValue(filter, null);
+                    }
+                    else
+                    {
+                        var value = (string)kvp.Value;
+                        prop.SetValue(filter, CreateProperty(context, prop.PropertyType, value));
+                    }
                 }
 
                 //todo: need to find a better way of dealing with this (this is for the debug property)

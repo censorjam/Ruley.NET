@@ -16,9 +16,12 @@ definition:
   - interval:       1s
   - perfcounter:    "% Processor Time"
     category:        "Processor"
-    instance:       _Total
-  - udp:            
+    instance:       _Total   
+    field:          value
   - console:        
+  - udpout:         "value is: {@event.value}"
+    host:           "hostmachine"
+    port:           1234
 
 #
 #  - interval:   1s
@@ -40,24 +43,3 @@ definition:
 #      - yteyrt:   F1
 #      - sdff:     F2
 ##    default:      S1
-
-
-
-
-#  - if:         => @event.newfield.StartsWith("F")
-#    then:       
-#
-
-#  - where:      => @event.count > 0
-#  - distinct:   
-#  - debounce:   250ms
-#  - console:    
-#
-#  - interval:   5s
-#  - graphite:   alias(spreadex.services.fins.live1.*.charting_appserver.application.process_cpu_usage-%, 'CPU %')
-#    url:        http://lapgrp001:8080
-#    debug:      true
-#  - count:      count
-#  - where:      => @event.value > @params.threshold
-#  - console:    "message {count} is {value}"
-

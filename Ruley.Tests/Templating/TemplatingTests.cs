@@ -3,9 +3,6 @@ using Ruley.NET;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ruley.Tests.Templating
 {
@@ -129,6 +126,19 @@ namespace Ruley.Tests.Templating
             templater.Compile("{FieldMember}");
             var result = templater.Apply(to);
             Assert.AreEqual("Field", result);
+        }
+
+        [Test]
+        public void DynamicObject()
+        {
+            dynamic to = new ExpandoObject();
+            to.Dynamic1 = "d1";
+            to.Dynamic2 = 2;
+
+            var templater = new Templater();
+            templater.Compile("{Dynamic1}-d{Dynamic2}");
+            var result = templater.Apply(to);
+            Assert.AreEqual("d1-d2", result);
         }
 
         [Test]

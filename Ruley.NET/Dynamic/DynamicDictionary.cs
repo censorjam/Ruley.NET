@@ -108,6 +108,12 @@ namespace Ruley
 		{
 			get
 			{
+                object value;
+                _data.TryGetValue(key, out value);
+
+                if (value == null && !_data.ContainsKey(key))
+                    throw new Exception($"Member does not exist '{key}'");
+
 				return _data[key];
 			}
 			set

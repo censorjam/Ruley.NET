@@ -4,7 +4,7 @@ namespace Ruley.NET
     {
         [Primary]
         public Property<string> Template { get; set; }
-        public Property<string> Destination { get; set; }
+        public Property<string> Field { get; set; }
 
         private Templater _templater = new Templater();
 
@@ -15,7 +15,7 @@ namespace Ruley.NET
 
         public override Event Apply(Event e)
         {
-            e[Destination.Get(e)] = _templater.Apply(new TemplateParameters() {@event = e, @params = Context.Parameters});
+            e[Field.Get(e)] = _templater.Apply(new TemplateParameters() {@event = e, @params = Context == null ? null : Context.Parameters});
             return e;
         }
     }

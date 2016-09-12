@@ -2,7 +2,7 @@
 {
     public abstract class InlineStage : Stage
 	{
-		protected override void Process(Event e)
+        protected override void Process(Event e)
 		{
 		    var nx = Apply(e);
 

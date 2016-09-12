@@ -4,11 +4,6 @@ using System.Collections.Concurrent;
 
 namespace Ruley.NET
 {
-    public class StageWrapper
-    {
-        public Stage Stage { get; set; }
-    }
-
     public class GroupByStage : Stage
     {
         [Primary]
@@ -35,6 +30,11 @@ namespace Ruley.NET
             });
 
             stage.OnNext(msg);
+        }
+
+        class StageWrapper
+        {
+            public Stage Stage { get; set; }
         }
     }
 }

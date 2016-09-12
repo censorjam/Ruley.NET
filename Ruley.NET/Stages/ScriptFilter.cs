@@ -18,7 +18,7 @@ namespace Ruley.NET
 
         public override Event Apply(Event msg)
         {
-            _script(msg, Context.Parameters);
+            _script(msg, Context == null ? null : Context.Parameters);
             return msg;
         }
     }

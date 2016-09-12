@@ -8,7 +8,7 @@ namespace Ruley.NET
         public Property<string> Counter { get; set; }
         public Property<string> Category { get; set; }
         public Property<string> Instance { get; set; }
-        public Property<string> Destination { get; set; }
+        public Property<string> Field { get; set; }
 
         private PerformanceCounter myCounter = new System.Diagnostics.PerformanceCounter();
 
@@ -21,8 +21,8 @@ namespace Ruley.NET
 
         public override Event Apply(Event e)
         {
-            float raw = myCounter.NextValue();
-            e[Destination.Get(e)] = raw;
+            var v = myCounter.NextValue();
+            e[Field.Get(e)] = v;
             return e;
         }
     }

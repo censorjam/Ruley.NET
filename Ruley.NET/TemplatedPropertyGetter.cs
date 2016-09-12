@@ -1,5 +1,4 @@
 using System;
-using System.Net;
 
 namespace Ruley.NET
 {
@@ -63,13 +62,13 @@ namespace Ruley.NET
 
             if (_type == PropertyType.Eval)
             {
-                object result = _script(msg, _ctx.Parameters);
+                object result = _script(msg, _ctx == null ? null : _ctx.Parameters);
                 return result;
             }
 
             if (_type == PropertyType.Template)
             {
-                var result = _templater.Apply(new TemplateParameters() { @event= msg, @params = _ctx.Parameters });
+                var result = _templater.Apply(new TemplateParameters() { @event = msg, @params = _ctx == null ? null : _ctx.Parameters });
                 return result;
             }
 

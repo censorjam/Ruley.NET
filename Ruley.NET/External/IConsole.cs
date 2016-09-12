@@ -11,7 +11,7 @@ namespace Ruley.NET.External
     {
         public void WriteLine(string text)
         {
-            Console.WriteLine();
+            Console.WriteLine(text);
         }
     }
 }

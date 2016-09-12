@@ -30,6 +30,10 @@ namespace Ruley.NET
             _ctx = ctx;
         }
 
+        public Property(object value) : this(null, value)
+        {
+        }
+
         public Property(Context ctx, object value)
         {
             Value = value;
@@ -56,17 +60,26 @@ namespace Ruley.NET
         //    throw new Exception("Implicit cast not allowed, use Get() method");
         //}
 
-        //public static implicit operator Property<T>(string d)
-        //{
-           
 
-        //    return new Property<T>(_ctx, d);
-        //}
+        public static implicit operator Property<T>(TimeSpan d)
+        {
+            return new Property<T>(d);
+        }
 
-        //public static implicit operator long(Property<T> d)
-        //{
-        //    throw new Exception("Invalid cast");
-        //}
+        public static implicit operator Property<T>(DateTime d)
+        {
+            return new Property<T>(d);
+        }
+
+        public static implicit operator Property<T>(string d)
+        {
+            return new Property<T>(d);
+        }
+
+        public static implicit operator Property<T>(long d)
+        {
+            return new Property<T>(d);
+        }
 
         //public static implicit operator Property<T>(long d)
         //{
@@ -115,7 +128,16 @@ namespace Ruley.NET
 
         public T Get(Event @event)
         {
-            return (T)_getter.GetValue(Value, @event);
+            return (T)TryConvert(_getter.GetValue(Value, @event));
+        }
+
+        public object TryConvert(object value)
+        {
+            if (typeof(T) == typeof(int))
+            {
+                return Convert.ToInt32(value);
+            }
+            return value;
         }
     }
 }

@@ -19,7 +19,13 @@ namespace Ruley.NET
 
         public static Stage ResolveStage(string name)
         {
-            var type = KnownTypes.First(t => t.Name.Replace("Stage", "").ToLower() == name.ToLower());
+            var type = KnownTypes.FirstOrDefault(t => t.Name.Replace("Stage", "").ToLower() == name.ToLower());
+
+            if (type == null)
+            {
+                throw new Exception($"Unable to locate Stage {name}");
+            }
+
             var filter = (Stage)_container.Resolve(type);
             return (Stage)_container.Resolve(type);
         }

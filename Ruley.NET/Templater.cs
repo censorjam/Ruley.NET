@@ -79,7 +79,6 @@ namespace Ruley.NET
         }
     }
 
-
     public class ValueGetter
     {
         private string[] _path;
@@ -89,11 +88,11 @@ namespace Ruley.NET
             _path = path.Split('.');
         }
 
-        private static ConcurrentDictionary<Type, CallSite<Func<CallSite, object, object>>> _cache = new ConcurrentDictionary<Type, CallSite<Func<CallSite, object, object>>>();
+        private static ConcurrentDictionary<string, CallSite<Func<CallSite, object, object>>> _cache = new ConcurrentDictionary<string, CallSite<Func<CallSite, object, object>>>();
 
         static object GetDynamicMember(object obj, string memberName)
         {
-            var callsite = _cache.GetOrAdd(obj.GetType(), t =>
+            var callsite = _cache.GetOrAdd(obj.GetType().FullName + memberName, t =>
             {
                 var binder = Microsoft.CSharp.RuntimeBinder.Binder.GetMember(CSharpBinderFlags.None, memberName, obj.GetType(),
                     new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) });

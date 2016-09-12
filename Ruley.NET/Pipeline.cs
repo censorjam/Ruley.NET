@@ -7,6 +7,10 @@ namespace Ruley.NET
 	{
         public DynamicDictionary Parameters { get; private set; }
 
+        public Context() : this(new DynamicDictionary())
+        {
+        }
+
 		public Context(DynamicDictionary parameters)
 		{
 			Parameters = parameters;

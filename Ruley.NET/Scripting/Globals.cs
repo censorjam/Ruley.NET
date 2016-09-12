@@ -17,5 +17,10 @@ namespace Ruley.NET
         {
             return dt.Month;
         }
+
+        public double round(double value, int precision)
+        {
+            return Math.Round(value, precision);
+        }
     }
 }
