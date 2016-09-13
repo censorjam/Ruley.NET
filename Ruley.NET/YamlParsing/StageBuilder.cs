@@ -10,17 +10,18 @@ namespace Ruley
     {
         static StageBuilder()
         {
+            IoC.RegisterStage<DebounceStage>();
             IoC.RegisterStage<ConsoleStage>();
             IoC.RegisterStage<IntervalStage>();
             IoC.RegisterStage<CountStage>();
             IoC.RegisterStage<IfStage>();
             IoC.RegisterStage<WhereStage>();
             IoC.RegisterStage<PrevStage>();
-            IoC.RegisterStage<DebounceStage>();
             IoC.RegisterStage<MergeStage>();
             IoC.RegisterStage<DistinctStage>();
             IoC.RegisterStage<ScriptStage>();
             IoC.RegisterStage<GraphiteStage>();
+            IoC.RegisterStage<EmailStage>();
             IoC.RegisterStage<RandomStage>();
             IoC.RegisterStage<TimestampStage>();
             IoC.RegisterStage<GroupByStage>();

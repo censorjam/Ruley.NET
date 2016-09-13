@@ -28,7 +28,7 @@ namespace Ruley.Tests
         {
             Output = new List<Event>();
             var yaml = LoadFromResource(yamlFile);
-            Pipeline = YamlParser.Load(yaml);
+            Pipeline = YamlParser.Load(yaml)[0];
             Pipeline.Subscribe(s => { Output.Add(s); });
             Pipeline.Start();
         }
@@ -74,12 +74,12 @@ namespace Ruley.Tests
             var x = YamlParser.Load(yaml);
 
             Event last = null;
-            x.Subscribe(s => { last = s; });
-            x.Start();
+            x[0].Subscribe(s => { last = s; });
+            x[0].Start();
 
             dynamic next = new Event(new DynamicDictionary());
             next.a = "abc";
-            x.OnNext(next);
+            x[0].OnNext(next);
 
             Assert.AreEqual("XYZ", last["newfield"]);
         }

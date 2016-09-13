@@ -3,7 +3,7 @@ using System.Net.Mail;
 
 namespace Ruley.NET.External
 {
-    interface IEmailClient : IDisposable
+    public interface IEmailClient
     {
         void Send(MailMessage message);
         string Host { get; set; }

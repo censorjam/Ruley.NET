@@ -1,11 +1,11 @@
 ﻿--- 
 
 parameters:
-  - query:      scale(divideSeries(summarize(nonNegativeDerivative(spreadex.services.fins.live1.*.spreadex_fins_coreservice_appserver.trades_failed.rejectedduetopricechange-count-items), '5min', 'sum', false),summarize(nonNegativeDerivative(spreadex.services.fins.live1.*.spreadex_fins_coreservice_appserver.trade_requests.total-items), '5min', 'sum', false)),100)
+  - query:      spreadex.services.*.*.*.*.application.process_cpu_usage-%
     threshold:  0
     operation:  ">"
     title:      CPU alert
-    recipients: marc.jones @spreadex.com
+    recipients: marc.jones@spreadex.com
 #
 #  - query:      alias(spreadex.services.all.*.*.databaseeventpublisher.application.process_cpu_usage-%, 'CPU Usage %')
 #    threshold:  -1

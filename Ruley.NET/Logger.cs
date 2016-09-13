@@ -6,10 +6,15 @@ namespace Ruley
 {
     public class Logger
     {
-        public Logger(string name, bool debugEnabled)
+        private string _name;
+        public string Name
         {
-            _logger = LogProvider.GetLogger(name);
-            IsDebugEnabled = debugEnabled;
+            get { return _name; }
+            set
+            {
+                _name = value;
+                _logger = LogProvider.GetLogger(value);
+            }
         }
 
         private ILog _logger;

@@ -17,6 +17,9 @@ namespace Ruley.NET
         private Func<dynamic, dynamic, object> _script;
         private Context _ctx;
 
+        private string _scriptText;
+        private string _scriptTemplate;
+
         public TemplatedPropertyGetter(Context ctx, object value)
         {
             _ctx = ctx;
@@ -35,10 +38,9 @@ namespace Ruley.NET
             if (str.StartsWith("=>"))
             {
                 _type = PropertyType.Eval;
-                _fieldName = str.Substring(2, str.Length - 2);
-                _fieldName = _fieldName.Replace("'", "\"");
-                _script = ScriptEngine.Create(_fieldName);
-
+                _scriptText = str.Substring(2, str.Length - 2);
+                _scriptText = _scriptText.Replace("'", "\"");
+                _templater.Compile(_scriptText);
                 return;
             }
 
@@ -62,7 +64,9 @@ namespace Ruley.NET
 
             if (_type == PropertyType.Eval)
             {
-                object result = _script(msg, _ctx == null ? null : _ctx.Parameters);
+                var tparams = new TemplateParameters() {@event = msg, @params = _ctx == null ? null : _ctx.Parameters};
+                var script = _templater.Apply(tparams);
+                object result = ScriptEngine.Create(script)(msg, _ctx == null ? null : _ctx.Parameters);
                 return result;
             }
 

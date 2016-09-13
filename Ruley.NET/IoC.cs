@@ -23,16 +23,21 @@ namespace Ruley.NET
 
             if (type == null)
             {
-                throw new Exception($"Unable to locate Stage {name}");
+                throw new Exception($"Unable to locate {name} Stage");
             }
 
             var filter = (Stage)_container.Resolve(type);
-            return (Stage)_container.Resolve(type);
+            return filter;
         }
 
         public static void Register<T>(T instance) where T:class
         {
             _container.Register<T>(instance);
+        }
+
+        public static object Resolve(Type type)
+        {
+            return _container.Resolve(type);
         }
 
         public static T Resolve<T>() where T:class

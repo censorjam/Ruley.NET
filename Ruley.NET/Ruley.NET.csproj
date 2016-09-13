@@ -143,6 +143,7 @@
       <HintPath>..\packages\System.Threading.Thread.4.0.0\lib\net46\System.Threading.Thread.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -177,15 +178,17 @@
     <Compile Include="External\IConsole.cs" />
     <Compile Include="External\IEmailSender.cs" />
     <Compile Include="External\IUdpOutClient.cs" />
-    <Compile Include="GraphiteFilter.cs" />
+    <Compile Include="Stages\GraphiteStage.cs" />
     <Compile Include="Pipeline.cs" />
     <Compile Include="Scripting\Globals.cs" />
     <Compile Include="Stages\DistinctStage.cs" />
     <Compile Include="Stages\EmailStage.cs" />
+    <Compile Include="Stages\ITimeProvider.cs" />
     <Compile Include="Stages\RandomStage.cs" />
     <Compile Include="Stages\TemplateStage.cs" />
     <Compile Include="Stages\TimestampStage.cs" />
     <Compile Include="Stages\UdpOutStage.cs" />
+    <Compile Include="Stages\UtcTimeProvider.cs" />
     <Compile Include="Templater.cs" />
     <Compile Include="Scripting\ScriptEngine.cs" />
     <Compile Include="Stages\GroupByStage.cs" />

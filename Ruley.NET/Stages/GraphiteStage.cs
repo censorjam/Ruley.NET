@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Web;
 
 namespace Ruley.NET
 {
@@ -25,7 +26,7 @@ namespace Ruley.NET
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var query = "render?target=" + Query.Get(msg) + "&format=json&from=-45sec&to=now";
+                var query = "render?target=" + HttpUtility.UrlEncode(Query.Get(msg)) + "&format=json&from=-45sec&to=now";
                 var response = client.GetAsync(query).Result;
                 if (response.IsSuccessStatusCode)
                 {

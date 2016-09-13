@@ -15,16 +15,25 @@ namespace Ruley.NET
 
 	public class YamlParser
 	{
-        private static Logger Logger = new Logger("YamlParser", false);
+        private static Logger Logger;
 
-		public static Pipeline LoadFromFile(string file)
+        static YamlParser()
+        {
+            Logger = new Logger()
+            {
+                Name = "Yaml Parser",
+                IsDebugEnabled = false
+            };
+        }
+
+		public static IList<Pipeline> LoadFromFile(string file)
 		{
 			Logger.Info("Loading file {0}", file);
 			var s = File.ReadAllText(file);
 			return Load(s);
 		}
 
-		public static Pipeline Load(string s)
+		public static IList<Pipeline> Load(string s)
 		{
 			Logger.Info(s);
 			var input = new StringReader(s);
@@ -41,11 +50,17 @@ namespace Ruley.NET
             }
 
 			Logger.Debug("Reading pipeline");
-			var p = YamlParser.FromDynamic(new Context(new DynamicDictionary(parameters[0])), y.Definition);
+
+		    var list = new List<Pipeline>();
+
+		    foreach (var immutableDictionary in parameters)
+		    {
+		        list.Add(YamlParser.FromDynamic(new Context(new DynamicDictionary(immutableDictionary)), y.Definition));
+		    }
 
 			Logger.Info("Loaded successfully");
 
-            return p;
+            return list;
 		}
 
 		public static Pipeline FromDynamic(Context ctx, dynamic def)

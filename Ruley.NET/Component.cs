@@ -7,7 +7,11 @@ namespace Ruley.NET
     {
         public Component()
         {
-            Logger = new Logger(GetType().Name.Replace("Stage", ""), false);
+            Logger = new Logger()
+            {
+                Name = GetType().Name.Replace("Stage", ""),
+                IsDebugEnabled = false
+            };
         }
 
         private bool _enabled = true;
@@ -29,7 +33,7 @@ namespace Ruley.NET
             set
             {
                 _debug = value;
-                Logger = new Logger(GetType().Name.Replace("Stage", ""), _debug);
+                Logger.IsDebugEnabled = value;
             }
         }
 
@@ -45,12 +49,6 @@ namespace Ruley.NET
         {
         }
 
-        //protected T Get<T>(object value, Event msg)
-        //{
-        //    var getter = new TemplatedPropertyGetter(value);
-        //    return getter.Get<T>(value, msg.Data);
-        //}
-        
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);

@@ -39,6 +39,18 @@ namespace Ruley.Tests.StageTests
     }
 
     [TestFixture]
+    class PropertyTests
+    {
+        [Test]
+        public void CloneTimespan()
+        {
+            var source = new Property<TimeSpan>("5s");
+
+
+        }
+    }
+
+    [TestFixture]
     class DebounceTests
     {
         private MockTimeProvider _timeProvider = new MockTimeProvider();
